@@ -27,43 +27,16 @@
       }
     </style>
     <style>
-        /* button组件内部样式 */
-      .wlin-button{
-          font-size: var(--font-size);
-          height: var(--button-height);
-          padding: 0 1em;
-          border-radius: var(--border-radius);
-          border:1px solid var(--border-color);
-          background: var(--button-bg)
-      }
-      .wlin-button:hover{
-          border-color:var(--border-color-hover)
-      }
-      .wlin-button:active{
-          background: var(--button-active-bg);
-      }
-      .wlin-button:focus{
-          outline: none;
-      }
+    
     </style>
 </head>
 <body>
     
 
     <div id="app">
-   
       <wlin-button></wlin-button>
     </div>
-
-    <script src='./node_modules//vue/dist/vue.min.js'></script>
-    <script src="button.js"></script>
-
-    <script>
-      new Vue({
-          el:'#app',
-          data:{
-          }
-      })
-    </script>
+    <!-- index.html根模版文件只依赖一个js文件 -- app.js， 而app.js用import引入各模块依赖 -->
+    <script src="./src/app.js"></script>
 </body>
 </html>
