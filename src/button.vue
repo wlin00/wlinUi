@@ -8,7 +8,11 @@
 </template>
 
 <script>
+import Icon from './icon'
 export default {
+  components: {
+    'wlin-icon':Icon,
+  },
   props: {
     icon: {
       type: String,
