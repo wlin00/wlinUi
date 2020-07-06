@@ -1,12 +1,13 @@
 {
   "name": "wlinui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "vue ui框架",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev-test": "parcel watch test/* --no-cache & karma start",
      "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
-     "start": "npx parcel index.html --no-cache"
+     "start": "npx parcel index.html --no-cache",
+     "build": "npx parcel build index.html --no-minify --no-cache"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,7 @@
     "vue",
     "ui"
   ],
-  "author": "wlin00",
+  "author": "wlin0z",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/wlin00/wlinUi/issues"
