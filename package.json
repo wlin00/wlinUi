@@ -1,13 +1,13 @@
 {
   "name": "wlinui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "vue ui框架",
   "main": "dist/index.js",
   "scripts": {
     "dev-test": "parcel watch test/* --no-cache & karma start",
      "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
      "start": "npx parcel index.html --no-cache",
-     "build": "npx parcel build index.html --no-minify --no-cache"
+     "build": "npx parcel build index.js --no-minify --no-cache"
   },
   "repository": {
     "type": "git",
