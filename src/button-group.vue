@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name:'wlinButtonGroup',
         mounted () {
             for(let item of this.$el.children){
                 // if()

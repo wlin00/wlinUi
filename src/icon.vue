@@ -7,6 +7,7 @@
 <script>
     import './iconFont'
     export default {
+        name:'wlinIcon',
         props: {
             name: {
                 type: String,
