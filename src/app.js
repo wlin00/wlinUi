@@ -4,6 +4,10 @@ import Button from './button'
 import Icon from './icon'
 import ButtonGroup from './button-group'
 import Input from './input'
+import Row from './row'
+import Col from './col'
+
+
 // 引入chai.js用于断言，进行单元测试;引入chai-spies进行mock
 import chai from 'chai'
 import spies from 'chai-spies'
@@ -14,6 +18,9 @@ Vue.component('wlin-button', Button)
 Vue.component('wlin-icon', Icon)
 Vue.component('wlin-button-group', ButtonGroup)
 Vue.component('wlin-input',Input)
+Vue.component('wlin-row',Row)
+Vue.component('wlin-col',Col)
+
 
 
 new Vue({

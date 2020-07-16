@@ -42,14 +42,57 @@
 
 
     <div id="app">
-        <div>
+
+        <!-- row-col 栅格组件区域 -->
+        <div style="border:1px solid red">
+            <!-- 支持均分的栅格 -->
+            <wlin-row>
+                <wlin-col>1</wlin-col>
+                <wlin-col>2</wlin-col>
+            </wlin-row>
+            <wlin-row>
+                <wlin-col>1</wlin-col>
+                <wlin-col>2</wlin-col>
+                <wlin-col>3</wlin-col>
+            </wlin-row>
+            <wlin-row>
+                <wlin-col>1</wlin-col>
+                <wlin-col>2</wlin-col>
+                <wlin-col>3</wlin-col>
+                <wlin-col>4</wlin-col>
+            </wlin-row>
+            <!-- 支持设置偏移量的栅格 -->
+            <wlin-row>
+                <wlin-col span='1'>1</wlin-col>
+                <wlin-col span='22' offset='1'>2</wlin-col>
+            </wlin-row>
+            <wlin-row>
+                <wlin-col span='3'>1</wlin-col>
+                <wlin-col span='10' offset='5'>2</wlin-col>
+                <wlin-col span='4' offset='2'>3</wlin-col>
+            </wlin-row>
+            <!-- 支持整体具备空隙gutter的栅格 -->
+            <wlin-row gutter='20'>
+                <wlin-col>1</wlin-col>
+                <wlin-col>2</wlin-col>
+            </wlin-row>
+            <wlin-row gutter='20'>
+                <wlin-col>1</wlin-col>
+                <wlin-col>2</wlin-col>
+                <wlin-col>3</wlin-col>
+                <wlin-col>4</wlin-col>
+            </wlin-row>
+        </div>
+
+        <!-- input 组件区域 -->
+        <div style="margin-top: 20px;">
           <wlin-input value='张三1'></wlin-input>
           <wlin-input value='张三2' disabled></wlin-input>
           <wlin-input value='张三3' readonly></wlin-input>
           <wlin-input value='张三4' error='您输入的名称已存在'></wlin-input>
-
         </div>
 
+        <!-- button 组件区域 -->
         <div style="margin-top: 20px;">
             <wlin-button :loading='loading1' @click='loading1 = !loading1'>按钮</wlin-button>
             <wlin-button icon='thumbs-up' icon-position='right' :loading='loading2' @click='loading2 = !loading2'>按钮
@@ -64,13 +107,11 @@
         </div>
 
         <!-- button组件的单元测试 -->
-        <div id="test"></div>
+        <!-- <div id="test"></div> -->
     </div>
     <!-- index.html根模版文件只依赖一个js文件 -- app.js， 而app.js用import引入各模块依赖 -->
     <script src="./src/app.js"></script>
 
-    <!-- 引入iconFont文件 -->
-    <!-- <script src='//at.alicdn.com/t/font_1918365_76etf97ersd.js'></script> -->
 </body>
 
 </html>
