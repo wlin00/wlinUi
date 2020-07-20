@@ -46,7 +46,7 @@
         <!-- row-col 栅格组件区域 -->
         <div style="border:1px solid red">
             <!-- 支持均分的栅格 -->
-            <wlin-row>
+            <!-- <wlin-row>
                 <wlin-col>1</wlin-col>
                 <wlin-col>2</wlin-col>
             </wlin-row>
@@ -60,9 +60,9 @@
                 <wlin-col>2</wlin-col>
                 <wlin-col>3</wlin-col>
                 <wlin-col>4</wlin-col>
-            </wlin-row>
+            </wlin-row> -->
             <!-- 支持设置偏移量的栅格 -->
-            <wlin-row>
+            <!-- <wlin-row>
                 <wlin-col span='1'>1</wlin-col>
                 <wlin-col span='22' offset='1'>2</wlin-col>
             </wlin-row>
@@ -70,18 +70,41 @@
                 <wlin-col span='3'>1</wlin-col>
                 <wlin-col span='10' offset='5'>2</wlin-col>
                 <wlin-col span='4' offset='2'>3</wlin-col>
-            </wlin-row>
+            </wlin-row> -->
             <!-- 支持整体具备空隙gutter的栅格 -->
-            <wlin-row gutter='20'>
+            <!-- <wlin-row gutter='20'>
                 <wlin-col>1</wlin-col>
                 <wlin-col>2</wlin-col>
-            </wlin-row>
-            <wlin-row gutter='20'>
+            </wlin-row> -->
+            <wlin-row gutter='20' align='right'>
                 <wlin-col>1</wlin-col>
                 <wlin-col>2</wlin-col>
                 <wlin-col>3</wlin-col>
                 <wlin-col>4</wlin-col>
             </wlin-row>
+
+            <!-- 支持响应式，添加phone...属性为屏幕最大宽为576px的场景改变span、offset属性 -->
+            <wlin-row gutter='20' >
+                <wlin-col 
+                  span='4' 
+                  :phone="{span:12,offset:0}"
+                  :ipad="{span:9,offset:0}"
+                  :pc="{span:2,offset:0}"
+                >1</wlin-col>
+                <wlin-col 
+                  span='20' 
+                  :phone="{span:12,offset:0,offset:0}"
+                  :ipad="{span:15,offset:0}"
+                  :pc="{span:22,offset:0}"
+                >2</wlin-col>
+            </wlin-row>
+
+            <wlin-row gutter='20' >
+                <wlin-col span='4'>1</wlin-col>
+                <wlin-col span='20'>2</wlin-col>
+            </wlin-row>
+
+
         </div>
 
         <!-- input 组件区域 -->
