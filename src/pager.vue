@@ -7,7 +7,9 @@
     >
       <wlin-icon name="left"></wlin-icon>
     </span>
-    <template v-if="!simple">
+
+    <!-- 省略号模式 -->
+    <!-- <template v-if="!simple">
       <template v-for="(page, index) in pages">
         <template v-if="!simple">
           <template v-if="page === currentPage">
@@ -19,6 +21,44 @@
               name="dots"
               :key="index"
             ></wlin-icon>
+          </template>
+          <template v-else>
+            <span
+              class="wlin-pager-item other"
+              @click="updatePage(page)"
+              :key="index"
+              >{{ page }}</span
+            >
+          </template>
+        </template>
+      </template>
+      <span
+        class="wlin-pager-nav next"
+        :class="{ disabled: currentPage === totalPage }"
+        @click="updatePage(currentPage + 1)"
+      >
+        <wlin-icon name="right"></wlin-icon>
+      </span>
+
+      <div class="wlin-pager-select wlin-pager-box">
+        <select @change="handleSelect">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+        </select>
+      </div>
+      <div class="wlin-pager-jump">
+        <input type="text" id="inp" :value.sync="inputValue" />
+        <span @click="handleJump">跳转</span>
+      </div>
+    </template> -->
+
+ <template v-if="!simple">
+      <template v-for="(page, index) in pages">
+        <template v-if="!simple">
+          <template v-if="page === currentPage">
+            <span class="wlin-pager-item current" :key="index">{{ page }}</span>
           </template>
           <template v-else>
             <span
@@ -69,6 +109,8 @@
         <wlin-icon name="right"></wlin-icon>
       </span>
     </template>
+
+    
   </div>
 </template>
 
@@ -133,7 +175,7 @@ export default {
       arr.forEach((item) => {
         map[item] = true;
       });
-      return Object.keys(map).map(Number);
+      return Object.keys(map).map((e)=>parseInt(e,10));
     },
     updatePage(page) {
       if (page >= 1 && page <= this.totalPage) {
@@ -168,36 +210,73 @@ export default {
 
   },
   computed: {
+    //省略号模式（未限制页数）- 计算属性
+    // pages() {
+    //   //分页数据初始值
+    //   let pages = [
+    //     1,
+    //     this.totalPage,
+    //     this.currentPage,
+    //     this.currentPage - 1,
+    //     this.currentPage - 2,
+    //     this.currentPage + 1,
+    //     this.currentPage + 2,
+    //   ];
+    //   //对数据非法项筛选
+    //   let pageFilter = pages.filter((e) => {
+    //     return e >= 1 && e <= this.totalPage;
+    //   });
+    //   //对数据去重排序
+    //   let pages2 = this.unique(pageFilter.sort((a, b) => a - b));
+    //   //当数据前一项和后一项差值大于1，插入一条字符串
+    //   //reduce,一参的回调方法，参数1--过去的值（可积累）；参数2--当前的值； 参数3 -- index ；参数4 -- 当前操作的数组
+    //   //reduce，二参的值对应prev的初始值
+    //   let pagesRes = pages2.reduce((prev, current, index, arr) => {
+    //     prev.push(current);
+    //     //判断前后差值
+    //     arr[index + 1] !== undefined &&
+    //       arr[index + 1] - arr[index] > 1 &&
+    //       prev.push("...");
+    //     return prev;
+    //   }, []);
+    //   console.log('currentArr: ',pagesRes)
+    //   return pagesRes;
+    // }, 
+
+    //传统模式（限制每次展示页数） - 计算属性
     pages() {
       //分页数据初始值
       let pages = [
-        1,
-        this.totalPage,
+        // 1,
+        // this.totalPage,
         this.currentPage,
         this.currentPage - 1,
         this.currentPage - 2,
+        this.currentPage - 3,
+        this.currentPage - 4,
+
         this.currentPage + 1,
         this.currentPage + 2,
+        this.currentPage + 3,
+        this.currentPage + 4,
+
       ];
-      //对数据非法项筛选
+      //对数据非法项筛选，只保留[1,max]间的值
       let pageFilter = pages.filter((e) => {
         return e >= 1 && e <= this.totalPage;
       });
       //对数据去重排序
       let pages2 = this.unique(pageFilter.sort((a, b) => a - b));
-      //当数据前一项和后一项差值大于1，插入一条字符串
-      //reduce,一参的回调方法，参数1--过去的值（可积累）；参数2--当前的值； 参数3 -- index ；参数4 -- 当前操作的数组
-      //reduce，二参的值对应prev的初始值
-      let pagesRes = pages2.reduce((prev, current, index, arr) => {
-        prev.push(current);
-        //判断前后差值
-        arr[index + 1] !== undefined &&
-          arr[index + 1] - arr[index] > 1 &&
-          prev.push("...");
-        return prev;
-      }, []);
-      return pagesRes;
-    },
+      //console.log('current ',this.currentPage,pages2,pages2.indexOf(this.currentPage))
+
+      //限制分页组件最大展示的数据总量
+      let pageRes = this.currentPage>3 && this.currentPage <= this.totalPage -2 ? 
+      [this.currentPage-2,this.currentPage-1,this.currentPage,this.currentPage+1,this.currentPage+2]:
+      (this.currentPage<=3 ? pages2.slice(0,5) : pages2.slice(-5))
+      
+      return pageRes;
+    }, 
+
   },
 };
 </script>
@@ -221,7 +300,7 @@ export default {
     justify-content: center;
     align-items: center;
     font-size: 12px;
-    min-width: 20px; //数字较长自动撑开
+    min-width: 22.02px; //数字较长自动撑开
     height: 20px;
     margin: 0 4px;
     cursor: pointer;
