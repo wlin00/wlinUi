@@ -1,0 +1,291 @@
+<template>
+  <div class="wlin-pager" v-if="!(hideIfOnePage && totalPage === 1)">
+    <span
+      class="wlin-pager-nav prev"
+      :class="{ disabled: currentPage === 1 }"
+      @click="updatePage(currentPage - 1)"
+    >
+      <wlin-icon name="left"></wlin-icon>
+    </span>
+    <template v-if="!simple">
+      <template v-for="(page, index) in pages">
+        <template v-if="!simple">
+          <template v-if="page === currentPage">
+            <span class="wlin-pager-item current" :key="index">{{ page }}</span>
+          </template>
+          <template v-else-if="page === '...'">
+            <wlin-icon
+              class="wlin-pager-separator"
+              name="dots"
+              :key="index"
+            ></wlin-icon>
+          </template>
+          <template v-else>
+            <span
+              class="wlin-pager-item other"
+              @click="updatePage(page)"
+              :key="index"
+              >{{ page }}</span
+            >
+          </template>
+        </template>
+      </template>
+      <span
+        class="wlin-pager-nav next"
+        :class="{ disabled: currentPage === totalPage }"
+        @click="updatePage(currentPage + 1)"
+      >
+        <wlin-icon name="right"></wlin-icon>
+      </span>
+
+      <div class="wlin-pager-select wlin-pager-box">
+        <select @change="handleSelect">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+        </select>
+      </div>
+      <div class="wlin-pager-jump">
+        <input type="text" id="inp" :value.sync="inputValue" />
+        <span @click="handleJump">跳转</span>
+      </div>
+    </template>
+
+    <!-- 简易模式 -->
+    <template v-else>
+      <template>
+        <div>
+          <span class="wlin-pager-item simple">{{ currentPage }}</span>
+          <span class="wlin-pager-item simple">/</span>
+          <span class="wlin-pager-item simple">{{ totalPage }}</span>
+        </div>
+      </template>
+      <span
+        class="wlin-pager-nav next"
+        :class="{ disabled: currentPage === totalPage }"
+        @click="updatePage(currentPage + 1)"
+      >
+        <wlin-icon name="right"></wlin-icon>
+      </span>
+    </template>
+  </div>
+</template>
+
+<script>
+import Icon from "./icon";
+export default {
+  name: "wlinPager",
+  components: {
+    "wlin-icon": Icon,
+  },
+  props: {
+    hideIfOnePage: {
+      type: Boolean,
+      default: true,
+    },
+    totalPage: {
+      type: Number,
+      required: true,
+    },
+    currentPage: {
+      type: Number,
+      required: true,
+    },
+    simple: {
+      type: Boolean,
+      default: false,
+    },
+    //pageSize改变时的回调
+    pageSizeChange: {
+      type: Function,
+      validator(value){
+        return typeof(value) === 'function'
+      }
+    },
+    //pageNo改变时的回调
+    pageChange: {
+      type: Function,
+      validator(value){
+        return typeof(value) === 'function'
+      }
+    },
+    //错误捕获时的回调
+    warnCallBack: {
+      type: Function,
+      validator(value){
+        return typeof(value) === 'function'
+      }
+    }
+  },
+  data() {
+    return {
+      inputValue: ''
+    };
+  },
+  mounted() {
+    // console.log(this.currentPage);
+  },
+  methods: {
+    unique(arr) {
+      //数组去重
+      let map = {};
+      arr.forEach((item) => {
+        map[item] = true;
+      });
+      return Object.keys(map).map(Number);
+    },
+    updatePage(page) {
+      if (page >= 1 && page <= this.totalPage) {
+        //子组件通知父组件更新数据
+        this.$emit("update:currentPage", page);
+        // console.log("change", page);
+        this.$nextTick(()=>{
+          this.pageChange && this.pageChange(page)
+        })
+      }
+    },
+    //处理分页组件点击的跳转
+    handleJump(){
+      let pageNo = document.querySelector('#inp').value === "" ? 1 : Number( document.querySelector('#inp').value )
+      if(1 <= pageNo && pageNo <= this.totalPage){
+      this.$emit("update:currentPage",pageNo)
+      this.$nextTick(()=>{
+          this.pageChange && this.pageChange(pageNo)
+        })
+      } else {
+        this.warnCallBack && this.warnCallBack()
+      }
+    },
+    //处理pagesize改变
+    handleSelect(e){
+      var currentSelect = Number(e.target.value)
+      //pageSizeChange时，组件当前页码回到第一页
+      this.$emit("update:currentPage", 1);
+      this.pageSizeChange && this.pageSizeChange(currentSelect)
+
+    },
+
+  },
+  computed: {
+    pages() {
+      //分页数据初始值
+      let pages = [
+        1,
+        this.totalPage,
+        this.currentPage,
+        this.currentPage - 1,
+        this.currentPage - 2,
+        this.currentPage + 1,
+        this.currentPage + 2,
+      ];
+      //对数据非法项筛选
+      let pageFilter = pages.filter((e) => {
+        return e >= 1 && e <= this.totalPage;
+      });
+      //对数据去重排序
+      let pages2 = this.unique(pageFilter.sort((a, b) => a - b));
+      //当数据前一项和后一项差值大于1，插入一条字符串
+      //reduce,一参的回调方法，参数1--过去的值（可积累）；参数2--当前的值； 参数3 -- index ；参数4 -- 当前操作的数组
+      //reduce，二参的值对应prev的初始值
+      let pagesRes = pages2.reduce((prev, current, index, arr) => {
+        prev.push(current);
+        //判断前后差值
+        arr[index + 1] !== undefined &&
+          arr[index + 1] - arr[index] > 1 &&
+          prev.push("...");
+        return prev;
+      }, []);
+      return pagesRes;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.wlin-pager {
+  user-select: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &-separator {
+    width: 20px;
+    font-size: 12px;
+  }
+  &-item {
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    padding: 0 4px;
+    color: #000;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    min-width: 20px; //数字较长自动撑开
+    height: 20px;
+    margin: 0 4px;
+    cursor: pointer;
+    &:hover {
+      border-color: rgb(56, 134, 165);
+    }
+    &.current {
+      cursor: default;
+      border-color: rgb(56, 134, 165);
+    }
+  }
+  &-box {
+    display: inline-block;
+    >select{
+      margin-left: 20px;
+    }
+  }
+  &-select {
+    width: 70px;
+    > select {
+      width: 100%;
+    }
+  }
+  &-jump {
+    display: inline-block;
+    margin-left: 40px;
+    >input{
+      display: inline-block;
+      width: 40px;
+      // top: 50%;
+      // transform: translateY(-50%);
+    }
+    >span{
+      display: inline-block;
+      width: 36px;
+      color: #fff;
+      background-color: rgb(20, 127, 214);
+      line-height: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      height: 20px;
+      border-radius: 4px;
+    }
+    >span:hover{
+      opacity: 0.7;
+    }
+  }
+  &-nav {
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(104, 122, 141);
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 8px 4px;
+    &.disabled {
+      fill: rgb(148, 162, 175);
+      background: rgb(110, 122, 136);
+      cursor: default;
+    }
+  }
+}
+</style>

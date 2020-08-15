@@ -6,6 +6,18 @@ import ButtonGroup from './button-group'
 import Input from './input'
 import Row from './row'
 import Col from './col'
+import Header from './header'
+import Content from './content'
+import Footer from './footer'
+import Layout from './layout'
+import Sider from './sider'
+import Pager from './pager'
+
+
+//测试其他组件
+import MyTest from './myTest'
+
+
 
 
 // 引入chai.js用于断言，进行单元测试;引入chai-spies进行mock
@@ -20,6 +32,18 @@ Vue.component('wlin-button-group', ButtonGroup)
 Vue.component('wlin-input',Input)
 Vue.component('wlin-row',Row)
 Vue.component('wlin-col',Col)
+Vue.component('wlin-header',Header)
+Vue.component('wlin-content',Content)
+Vue.component('wlin-footer',Footer)
+Vue.component('wlin-layout',Layout)
+Vue.component('wlin-sider',Sider)
+Vue.component('wlin-pager',Pager)
+
+
+
+Vue.component('wlin-my-test',MyTest)
+
+
 
 
 
