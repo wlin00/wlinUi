@@ -1,30 +1,22 @@
 <template>
   <div class="wlin-pager" v-if="!(hideIfOnePage && totalPage === 1)">
+
+ <template v-if="!simple">
     <span
       class="wlin-pager-nav prev"
-      :class="{ disabled: currentPage === 1 }"
-      @click="updatePage(currentPage - 1)"
+      :class="{ disabled: value === 1 }"
+      @click="updatePage(value - 1)"
     >
       <wlin-icon name="left"></wlin-icon>
     </span>
-
-    <!-- 省略号模式 -->
-    <!-- <template v-if="!simple">
       <template v-for="(page, index) in pages">
         <template v-if="!simple">
-          <template v-if="page === currentPage">
+          <template v-if="page === value">
             <span class="wlin-pager-item current" :key="index">{{ page }}</span>
-          </template>
-          <template v-else-if="page === '...'">
-            <wlin-icon
-              class="wlin-pager-separator"
-              name="dots"
-              :key="index"
-            ></wlin-icon>
           </template>
           <template v-else>
             <span
-              class="wlin-pager-item other"
+              class="wlin-pager-item"
               @click="updatePage(page)"
               :key="index"
               >{{ page }}</span
@@ -34,46 +26,8 @@
       </template>
       <span
         class="wlin-pager-nav next"
-        :class="{ disabled: currentPage === totalPage }"
-        @click="updatePage(currentPage + 1)"
-      >
-        <wlin-icon name="right"></wlin-icon>
-      </span>
-
-      <div class="wlin-pager-select wlin-pager-box">
-        <select @change="handleSelect">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="40">40</option>
-        </select>
-      </div>
-      <div class="wlin-pager-jump">
-        <input type="text" id="inp" :value.sync="inputValue" />
-        <span @click="handleJump">跳转</span>
-      </div>
-    </template> -->
-
- <template v-if="!simple">
-      <template v-for="(page, index) in pages">
-        <template v-if="!simple">
-          <template v-if="page === currentPage">
-            <span class="wlin-pager-item current" :key="index">{{ page }}</span>
-          </template>
-          <template v-else>
-            <span
-              class="wlin-pager-item other"
-              @click="updatePage(page)"
-              :key="index"
-              >{{ page }}</span
-            >
-          </template>
-        </template>
-      </template>
-      <span
-        class="wlin-pager-nav next"
-        :class="{ disabled: currentPage === totalPage }"
-        @click="updatePage(currentPage + 1)"
+        :class="{ disabled: value === totalPage }"
+        @click="updatePage(value + 1)"
       >
         <wlin-icon name="right"></wlin-icon>
       </span>
@@ -94,17 +48,24 @@
 
     <!-- 简易模式 -->
     <template v-else>
+       <span
+      class="wlin-pager-nav prev"
+      :class="{ disabled: value === 1 }"
+      @click="updatePage(value - 1)"
+    >
+      <wlin-icon name="left"></wlin-icon>
+    </span>
       <template>
         <div>
-          <span class="wlin-pager-item simple">{{ currentPage }}</span>
+          <span class="wlin-pager-item simple">{{ value }}</span>
           <span class="wlin-pager-item simple">/</span>
           <span class="wlin-pager-item simple">{{ totalPage }}</span>
         </div>
       </template>
       <span
         class="wlin-pager-nav next"
-        :class="{ disabled: currentPage === totalPage }"
-        @click="updatePage(currentPage + 1)"
+        :class="{ disabled: value === totalPage }"
+        @click="updatePage(value + 1)"
       >
         <wlin-icon name="right"></wlin-icon>
       </span>
@@ -130,7 +91,7 @@ export default {
       type: Number,
       required: true,
     },
-    currentPage: {
+    value: { // v-model 会自动找到自定义组件中的名为‘value’的prop， 和对应的名为‘input’的emit事件发布
       type: Number,
       required: true,
     },
@@ -145,13 +106,13 @@ export default {
         return typeof(value) === 'function'
       }
     },
-    //pageNo改变时的回调
-    pageChange: {
-      type: Function,
-      validator(value){
-        return typeof(value) === 'function'
-      }
-    },
+    //pageNo改变时的回调 - v-model加入后只需要订阅change事件
+    // pageChange: {
+    //   type: Function,
+    //   validator(value){
+    //     return typeof(value) === 'function'
+    //   }
+    // },
     //错误捕获时的回调
     warnCallBack: {
       type: Function,
@@ -180,21 +141,24 @@ export default {
     updatePage(page) {
       if (page >= 1 && page <= this.totalPage) {
         //子组件通知父组件更新数据
-        this.$emit("update:currentPage", page);
-        // console.log("change", page);
-        this.$nextTick(()=>{
-          this.pageChange && this.pageChange(page)
-        })
+        this.$emit("input", page);
+        this.$emit('change', page)
+        // this.$nextTick(()=>{
+        //   this.pageChange && this.pageChange(page)
+        //   console.log("change", this.pages);
+        // })
       }
     },
     //处理分页组件点击的跳转
     handleJump(){
       let pageNo = document.querySelector('#inp').value === "" ? 1 : Number( document.querySelector('#inp').value )
       if(1 <= pageNo && pageNo <= this.totalPage){
-      this.$emit("update:currentPage",pageNo)
-      this.$nextTick(()=>{
-          this.pageChange && this.pageChange(pageNo)
-        })
+      // this.$emit("update:currentPage",pageNo)
+      // this.$nextTick(()=>{
+      //     this.pageChange && this.pageChange(pageNo)
+      //   })
+      this.$emit('input', pageNo)
+      this.$emit('change', pageNo)
       } else {
         this.warnCallBack && this.warnCallBack()
       }
@@ -203,7 +167,8 @@ export default {
     handleSelect(e){
       var currentSelect = Number(e.target.value)
       //pageSizeChange时，组件当前页码回到第一页
-      this.$emit("update:currentPage", 1);
+      // this.$emit("update:currentPage", 1);
+      this.$emit('input', 1)
       this.pageSizeChange && this.pageSizeChange(currentSelect)
 
     },
@@ -249,16 +214,16 @@ export default {
       let pages = [
         // 1,
         // this.totalPage,
-        this.currentPage,
-        this.currentPage - 1,
-        this.currentPage - 2,
-        this.currentPage - 3,
-        this.currentPage - 4,
+        this.value,
+        this.value - 1,
+        this.value - 2,
+        this.value - 3,
+        this.value - 4,
 
-        this.currentPage + 1,
-        this.currentPage + 2,
-        this.currentPage + 3,
-        this.currentPage + 4,
+        this.value + 1,
+        this.value + 2,
+        this.value + 3,
+        this.value + 4,
 
       ];
       //对数据非法项筛选，只保留[1,max]间的值
@@ -270,9 +235,9 @@ export default {
       //console.log('current ',this.currentPage,pages2,pages2.indexOf(this.currentPage))
 
       //限制分页组件最大展示的数据总量
-      let pageRes = this.currentPage>3 && this.currentPage <= this.totalPage -2 ? 
-      [this.currentPage-2,this.currentPage-1,this.currentPage,this.currentPage+1,this.currentPage+2]:
-      (this.currentPage<=3 ? pages2.slice(0,5) : pages2.slice(-5))
+      let pageRes = this.value >= 3 && this.value <= this.totalPage -2 ? 
+      [this.value-2,this.value-1,this.value,this.value+1,this.value+2]:
+      (this.value<=3 ? pages2.slice(0,5) : pages2.slice(-5))
       
       return pageRes;
     }, 

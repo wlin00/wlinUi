@@ -12,10 +12,12 @@ import Footer from './footer'
 import Layout from './layout'
 import Sider from './sider'
 import Pager from './pager'
-
+import Toast from './toast'
 
 //测试其他组件
 import MyTest from './myTest'
+//toast
+import ToastPlugin from './toast-plugin'
 
 
 
@@ -24,6 +26,8 @@ import MyTest from './myTest'
 import chai from 'chai'
 import spies from 'chai-spies'
 chai.use(spies)
+
+
 
 //声明全局的组件
 Vue.component('wlin-button', Button)
@@ -38,12 +42,12 @@ Vue.component('wlin-footer',Footer)
 Vue.component('wlin-layout',Layout)
 Vue.component('wlin-sider',Sider)
 Vue.component('wlin-pager',Pager)
-
-
+Vue.component('wlin-toast',Toast)
 
 Vue.component('wlin-my-test',MyTest)
 
-
+// 安装toast插件
+Vue.use(ToastPlugin)
 
 
 
@@ -53,6 +57,11 @@ new Vue({
         loading1: false,
         loading2: false,
         loading3: false
+    },
+    methods:{
+        showToast(){
+            this.$toast('hello')
+        }
     }
 })
 

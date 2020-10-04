@@ -2,10 +2,10 @@
     <div class="myTest">
         <!-- sync:父组件监听子组件的改变，同步改变 -->
      <wlin-pager 
-         :current-page.sync="pageNo" 
+         v-model="pageNo" 
          :total-page="pageSize" 
          :page-size-change="onPageSizeChange"
-         :page-change="onPageChange"
+         @change="onPageChange"
          :warn-call-back="handleWarn"
          :hide-if-one-page="false"
          :simple="simple"
@@ -34,6 +34,7 @@ import Pager from './pager'
                 //pageNo改变的回调
                 // this.pageNo = 1
                 // console.log('page-parent',e)
+                console.log(e)
             },
             handleWarn(){
               console.warn('currentPage should be greater than 1 and lower than totalPage')

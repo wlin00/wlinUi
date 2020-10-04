@@ -48,14 +48,17 @@
     <div id="app">
 
 
-        <!-- 分页组件 -->
+        <!-- toast组件 -->
+        <button @click='showToast'>测试toast</button>
+
+        <!-- 分页组件-->
         <!-- <wlin-pager :hide-if-one-page="true" :total-page="10" :current-page="1"></wlin-pager> -->
         <div>
-            <span>显示省略号：</span><wlin-my-test ></wlin-my-test>
+            <span>传统模式：</span><wlin-my-test ></wlin-my-test>
         </div>
-        <div>
-            <span>简单模式：</span><wlin-my-test :simple="true"></wlin-my-test>
-        </div>
+        <!-- <div>
+            <span>简单模式：</span><wlin-my-test simple></wlin-my-test>
+        </div> -->
 
 
 
@@ -109,21 +112,22 @@
                 <wlin-col>3</wlin-col>
                 <wlin-col>4</wlin-col>
             </wlin-row> -->
-            <!-- 支持响应式，添加phone...属性为屏幕最大宽为576px的场景改变span、offset属性 -->
+            <!-- 支持响应式，添加phone...属性为屏幕最大宽为576px的场景改变span、offset属性, 响应式的优先级大于span、属性 -->
             <!-- <wlin-row gutter='20' >
                 <wlin-col 
                   span='4' 
                   :phone="{span:12,offset:0}"
                   :ipad="{span:9,offset:0}"
-                  :pc="{span:2,offset:0}"
+                  :pc="{span:20,offset:0}"
                 >1</wlin-col>
                 <wlin-col 
                   span='20' 
-                  :phone="{span:12,offset:0,offset:0}"
+                  :phone="{span:12,offset:0}"
                   :ipad="{span:15,offset:0}"
-                  :pc="{span:22,offset:0}"
+                  :pc="{span:4,offset:0}"
                 >2</wlin-col>
             </wlin-row> -->
+
             <!-- <wlin-row gutter='20' >
                 <wlin-col span='4'>1</wlin-col>
                 <wlin-col span='20'>2</wlin-col>
