@@ -18,7 +18,7 @@
           },
           autoCloseDelay: {
               type: Number,
-              default: 30000
+              default: 3000
           },
 
           // 是否展示关闭按钮
