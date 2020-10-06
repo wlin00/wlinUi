@@ -1,9 +1,14 @@
 <template>
-    <div class="wlin-toast">
-        <slot></slot>
+    <div class="wlin-toast" ref='parent'>
+        <!-- 若支持文本传入html， 需开启enableHtml，结合v-html实现 -->
+        <div class="wlin-toast__msgbox">
+          <slot v-if="!enableHtml"></slot>
+          <div class="test" v-else v-html="$slots.default[0]"></div>
+        </div>
+       
 
         <!-- toast关闭按钮, 点击后销毁组件，并触发用户回调（如果有的话) -->
-        <span class="wlin-toast__close" v-if="showCloseBtn" @click="handleClickClose" >{{ closeBtnOptions.text }}</span>
+        <span class="wlin-toast__close" ref='child' v-if="showCloseBtn" @click="handleClickClose" >{{ closeBtnOptions.text }}</span>
     </div>
 </template>
 
@@ -27,6 +32,12 @@
               default: true
           },
 
+          // 是否支持html形式的文本
+          enableHtml: {
+              type: Boolean,
+              default: false
+          },
+
           // 关闭按钮相关属性：接收一个对象， 里面包含关闭按钮的文字内容、 关闭后的回调
           closeBtnOptions:{
               type: Object,
@@ -41,7 +52,6 @@
       },
       data() {
           return {
-              key: ''
           }
       },
       methods: {
@@ -61,24 +71,39 @@
             typeof(this.closeBtnOptions.handleClose) === 'function' &&
             this.closeBtnOptions.handleClose()
             
-          } 
+          },
+
+          // 调整开启min-height、flex的父盒子内部子盒子的高（子盒子height:100%失效)
+          adjustHeight() {
+              // 等待dom的挂载完成
+              if (!this.showCloseBtn) return
+              this.$nextTick(() => {
+                this.$refs.child.style.height = `${this.$refs.parent.getBoundingClientRect().height}px`
+              })
+          },
+
+          // 当autoClose存在时，定时器到点关闭toast实例
+          execAutoClose() {
+            let { autoClose, autoCloseDelay } = this
+            if (autoClose) {
+              setTimeout(() => {
+                this.close()
+              }, autoCloseDelay)
+            }
+          }
       },
       mounted () {
-        let { autoClose, autoCloseDelay } = this
-        if (autoClose) {
-            setTimeout(() => {
-              this.close()
-            }, autoCloseDelay)
-        }
+        this.adjustHeight()
+        this.execAutoClose()
       },
-        
     }
 </script>
 
 <style lang="scss" scoped>
 
 $font-size: 14px;
-$toast-height: 48px;
+$toast-min-height: 48px;
+$toast-line-height: 1.8;
 $toast-bg: rgba(0, 0, 0, .75);
 
 
@@ -92,8 +117,8 @@ $toast-bg: rgba(0, 0, 0, .75);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  line-height: 1.8;
-  height: $toast-height;
+  line-height: $toast-line-height;
+  min-height: $toast-min-height;
   font-size: $font-size;
   background: $toast-bg;
   border-radius: 4px;
@@ -111,11 +136,18 @@ $toast-bg: rgba(0, 0, 0, .75);
       padding-left: 15px;
       margin-left: 15px;
       border-left: 1px solid aliceblue;
+      // flex盒子的子盒子， 不受父盒子的挤压影响
+      flex-shrink: 0;
       cursor: pointer;
       &:hover{
-          opacity: .85;
+          opacity: .7;
       }
   } 
+
+  &__msgbox{
+      width: 100%;
+      padding: 7px 0;
+  }
 
 }
 </style>

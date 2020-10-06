@@ -8,16 +8,15 @@ export default{
             let toast = new toastConstructor({
                 propsData: {
                     closeBtnOptions: toastOptions.closeBtnOptions,
-                    showCloseBtn: toastOptions.showCloseBtn
+                    showCloseBtn: toastOptions.showCloseBtn,
+                    enableHtml: toastOptions.enableHtml
                 }
             }) // 获取一个toast实例
             
-            // 给实例的：未包含在具名插槽中的节点属性赋值
+            // 给实例的：未包含在具名插槽中的节点属性赋值（文本赋值）
             toast.$slots.default = [message]
             // 手动挂载一个未挂载的实例
             toast.$mount()
-            console.log('el', toast)
-
 
             // toast 实例的根dom元素插入body
             document.body.appendChild(toast.$el)
