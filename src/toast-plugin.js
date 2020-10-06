@@ -3,9 +3,14 @@ import Toast from './toast'
 export default{
     install (Vue, options) {
         // message参数可以拿到用户创建toast实例时的传参
-        Vue.prototype.$toast = function (message) {
+        Vue.prototype.$toast = function (message, toastOptions) {
             let toastConstructor = Vue.extend(Toast) // 获取Toast组件的一个构造器
-            let toast = new toastConstructor() // 获取一个toast实例
+            let toast = new toastConstructor({
+                propsData: {
+                    closeBtnOptions: toastOptions.closeBtnOptions,
+                    showCloseBtn: toastOptions.showCloseBtn
+                }
+            }) // 获取一个toast实例
             
             // 给实例的：未包含在具名插槽中的节点属性赋值
             toast.$slots.default = [message]

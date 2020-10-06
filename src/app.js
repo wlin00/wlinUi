@@ -60,7 +60,20 @@ new Vue({
     },
     methods:{
         showToast(){
-            this.$toast('hello')
+            this.$toast('hello', {
+            // 是否展示关闭按钮 - 默认为true
+            // showCloseBtn: false,
+                 
+            // 关闭按钮相关选项 - 对象的数据结构，供用户修改关闭按钮文本、关闭的回调。
+            closeBtnOptions: {
+                text: '知道了',
+                handleClose: this.handleClose
+            },
+          })
+        },
+        // 关闭toast后的回调
+        handleClose() {
+          console.log('hhha')
         }
     }
 })
