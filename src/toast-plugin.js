@@ -7,10 +7,13 @@ export default{
         Vue.prototype.$toast = function (message, toastOptions) {
             // 执行toast的构造函数， 创建一个toast实例，并判断若之前存在toast实例则销毁之前的。
             if (currentToast) currentToast.close()
-            currentToast = createToast({Vue, message})
+            currentToast = createToast({Vue, message, callback: () => {
+                // toast关闭的回调，置标志符为null
+                currentToast = null
+            }})
 
             // 工具函数，用于新建一个toast实例,params:1-Vue实例；2-toast消息文本；3-toast相关options）
-            function createToast({Vue, message}) {
+            function createToast({Vue, message, callback}) {
               // 获取Toast组件的一个构造器
               let toastConstructor = Vue.extend(Toast) 
               // 获取一个toast实例
@@ -24,6 +27,8 @@ export default{
               toast.$slots.default = [message]
               // 手动挂载一个未挂载的实例
               toast.$mount()
+              // 监听toast关闭的回调
+              toast.$on('close', callback)
               // toast 实例的根dom元素插入body
               document.body.appendChild(toast.$el)
               return toast

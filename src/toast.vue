@@ -1,15 +1,17 @@
 <template>
-    <div class="wlin-toast" ref='parent' :class="computePosition">
-        <!-- 若支持文本传入html， 需开启enableHtml，结合v-html实现 -->
-        <div class="wlin-toast__msgbox">
-          <slot v-if="!enableHtml"></slot>
-          <div class="test" v-else v-html="$slots.default[0]"></div>
-        </div>
-       
-
-        <!-- toast关闭按钮, 点击后销毁组件，并触发用户回调（如果有的话) -->
-        <span class="wlin-toast__close" ref='child' v-if="showCloseBtn" @click="handleClickClose" >{{ closeBtnOptions.text }}</span>
+<!-- 外层控制x轴方向，内层添加动画 -->
+  <div class="wlin-wrap" :class="computePosition" >
+    <div class="wlin-toast" ref='parent' >
+      <!-- 若支持文本传入html， 需开启enableHtml，结合v-html实现 -->
+      <div class="wlin-toast__msgbox">
+        <slot v-if="!enableHtml"></slot>
+        <div class="test" v-else v-html="$slots.default[0]"></div>
+      </div>
+      <!-- toast关闭按钮, 点击后销毁组件，并触发用户回调（如果有的话) -->
+      <span class="wlin-toast__close" ref='child' v-if="showCloseBtn" @click="handleClickClose" >{{ closeBtnOptions.text }}</span>   
     </div>
+  </div>
+   
 </template>
 
 <script>
@@ -41,9 +43,9 @@
           // 决定toast出现位置的属性，可接受left、right、top、bottom、center五个位置
           position: {
             type: String,
-            default: 'center',
+            default: 'middle',
             validator(value){
-              return ['left', 'right', 'top', 'bottom', 'center'].indexOf(value) >= 0
+              return ['top', 'bottom', 'middle'].indexOf(value) >= 0
             }
           },
 
@@ -67,6 +69,7 @@
           // 组件销毁函数
           close() {
             this.$el.remove() // 将组件从dom中移除
+            this.$emit('close') // 通知插件，toast已经关闭，可将插件中toast标志符置为null
             this.$destroy() // 取消组件相关事件绑定  
           },
 
@@ -121,6 +124,73 @@ $toast-min-height: 48px;
 $toast-line-height: 1.8;
 $toast-bg: rgba(0, 0, 0, .75);
 
+// 中间的toast淡出
+@keyframes fade-in {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 100%;
+  }
+}
+
+// 下方的toast向上淡出
+@keyframes slide-up {
+  0%{
+    opacity: 0;
+    transform: translateY(100%)
+  }
+  100%{
+    opacity: 100%;
+    transform: translateY(0)
+  }
+}
+
+// 上方的toast向下淡出
+@keyframes slide-down {
+  0%{
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100%{
+    opacity: 100%;
+    transform: translateY(0%)
+  }
+}
+
+.wlin-wrap{
+  // 外层wrap控制位置（水平居中，竖直方向则有三种情况)
+  // 内层div控制动画，由外层wrap条件找到内层div， 给内层toast加上对应动画
+  
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+
+  // toast位置在上方的情况
+  &.wlin-toast--top{
+    top: 0;
+    .wlin-toast{
+      animation: slide-down .3s linear;
+    }
+  }
+  // toast位置在下方的情况
+  &.wlin-toast--bottom{
+    bottom: 0;
+    .wlin-toast{
+      animation: slide-up .3s linear;
+    }
+  }
+  // toast位置在中间的情况
+  &.wlin-toast--middle{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    .wlin-toast{
+      animation: fade-in .3s linear;
+    }
+  }
+
+}
 
 .wlin-toast{
  
@@ -128,7 +198,6 @@ $toast-bg: rgba(0, 0, 0, .75);
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  position: fixed;
   line-height: $toast-line-height;
   min-height: $toast-min-height;
   font-size: $font-size;
@@ -139,39 +208,6 @@ $toast-bg: rgba(0, 0, 0, .75);
   padding: 0 15px;
   transition: all 0.5s linear;
   max-width: 800px;
-
-  // toast位置
-  &--left{
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-  }
-
-  &--right{
-    top: 50%;
-    right: 0;
-    transform: translateY( -50%);
-  }
-
-  &--top{
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  &--bottom{
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  &--center{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-
 
   &__close{
       height: 100%;
@@ -194,6 +230,13 @@ $toast-bg: rgba(0, 0, 0, .75);
       width: 100%;
       padding: 7px 0;
   }
+}
 
+.wlin-fade-enter-active, .fade-leave-active{
+  transition: opacity .5s linear;
+}
+
+.wlin-fade-enter, .fade-leaver-to{
+  opacity: 0;
 }
 </style>

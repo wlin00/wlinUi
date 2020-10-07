@@ -59,27 +59,52 @@ new Vue({
         loading3: false
     },
     methods:{
-        showToast(){
+        showToastTop(){
             this.$toast(`${Math.floor(Math.random()*10)}<a href="//www.baidu.com">11</a>hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大   的撒的撒dasdsad撒阿斯顿`, {
             // 是否展示关闭按钮 - 默认为true
-            // showCloseBtn: false,
-
+            showCloseBtn: false,
             // 是否支持Html格式
             enableHtml: true,
-            position: 'left',
-
+            position: 'top',
             // 关闭按钮相关选项 - 对象的数据结构，供用户修改关闭按钮文本、关闭的回调。
             closeBtnOptions: {
                 text: '知道了',
                 handleClose: this.handleClose
             },
-
           })
         },
+        showToastBottom(){
+          this.$toast(`${Math.floor(Math.random()*10)}<a href="//www.baidu.com">11</a>hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大   的撒的撒dasdsad撒阿斯顿`, {
+          // 是否展示关闭按钮 - 默认为true
+          showCloseBtn: false,
+          // 是否支持Html格式
+          enableHtml: true,
+          position: 'bottom',
+          // 关闭按钮相关选项 - 对象的数据结构，供用户修改关闭按钮文本、关闭的回调。
+          // closeBtnOptions: {
+          //     text: '知道了',
+          //     handleClose: this.handleClose
+          // },
+        })
+      },
+      showToastMiddle(){
+        this.$toast(`${Math.floor(Math.random()*10)}<a href="//www.baidu.com">11</a>hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大hdsahdsaudhsaiudahiudsadsa的萨达达大师大师大师的撒打算的撒大   的撒的撒dasdsad撒阿斯顿`, {
+        // 是否展示关闭按钮 - 默认为true
+        // showCloseBtn: false,
+        // 是否支持Html格式
+        enableHtml: true,
+        position: 'middle',
+        // 关闭按钮相关选项 - 对象的数据结构，供用户修改关闭按钮文本、关闭的回调。
+        // closeBtnOptions: {
+        //     text: '知道了',
+        //     handleClose: this.handleClose
+        // },
+      })
+    },
         // 关闭toast后的回调
-        handleClose() {
-          console.log('hhha')
-        }
+    handleClose() {
+      console.log('hhha')
+      }
     }
 })
 
