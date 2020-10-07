@@ -1,5 +1,5 @@
 <template>
-    <div class="wlin-toast" ref='parent'>
+    <div class="wlin-toast" ref='parent' :class="computePosition">
         <!-- 若支持文本传入html， 需开启enableHtml，结合v-html实现 -->
         <div class="wlin-toast__msgbox">
           <slot v-if="!enableHtml"></slot>
@@ -23,7 +23,7 @@
           },
           autoCloseDelay: {
               type: Number,
-              default: 3000
+              default: 300022
           },
 
           // 是否展示关闭按钮
@@ -36,6 +36,15 @@
           enableHtml: {
               type: Boolean,
               default: false
+          },
+
+          // 决定toast出现位置的属性，可接受left、right、top、bottom、center五个位置
+          position: {
+            type: String,
+            default: 'center',
+            validator(value){
+              return ['left', 'right', 'top', 'bottom', 'center'].indexOf(value) >= 0
+            }
           },
 
           // 关闭按钮相关属性：接收一个对象， 里面包含关闭按钮的文字内容、 关闭后的回调
@@ -96,6 +105,12 @@
         this.adjustHeight()
         this.execAutoClose()
       },
+      computed: {
+        computePosition() {
+          // 根据接收或默认的position属性决定toast出现的位置
+          return {[`wlin-toast--${this.position}`]:true}
+        }
+      },
     }
 </script>
 
@@ -114,9 +129,6 @@ $toast-bg: rgba(0, 0, 0, .75);
   display: flex;
   align-items: center;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   line-height: $toast-line-height;
   min-height: $toast-min-height;
   font-size: $font-size;
@@ -126,6 +138,40 @@ $toast-bg: rgba(0, 0, 0, .75);
   color: white;
   padding: 0 15px;
   transition: all 0.5s linear;
+  max-width: 800px;
+
+  // toast位置
+  &--left{
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  &--right{
+    top: 50%;
+    right: 0;
+    transform: translateY( -50%);
+  }
+
+  &--top{
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--bottom{
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--center{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
 
   &__close{
       height: 100%;
