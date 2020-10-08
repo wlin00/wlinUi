@@ -14,6 +14,13 @@ import Sider from './sider'
 import Pager from './pager'
 import Toast from './toast'
 
+import Tabs from './tabs'
+import TabsBody from './tabs-body'
+import TabsHead from './tabs-head'
+import TabsItem from './tabs-item'
+import TabsPane from './tabs-pane'
+
+
 //测试其他组件
 import MyTest from './myTest'
 //toast
@@ -44,6 +51,13 @@ Vue.component('wlin-sider',Sider)
 Vue.component('wlin-pager',Pager)
 Vue.component('wlin-toast',Toast)
 
+Vue.component('wlin-tabs',Tabs)
+Vue.component('wlin-tabs-head',TabsHead)
+Vue.component('wlin-tabs-body',TabsBody)
+Vue.component('wlin-tabs-item',TabsItem)
+Vue.component('wlin-tabs-pane',TabsPane)
+
+
 Vue.component('wlin-my-test',MyTest)
 
 // 安装toast插件
@@ -56,7 +70,10 @@ new Vue({
     data: {
         loading1: false,
         loading2: false,
-        loading3: false
+        loading3: false,
+
+        // 当前选中的tab名
+        selectedTab: 'video'
     },
     methods:{
         showToastTop(){

@@ -47,18 +47,43 @@
 
     <div id="app">
 
+        <!-- tab组件 -->
+        <wlin-tabs :selected.sync="selectedTab">
+            <wlin-tabs-head>
+                <!-- 顶部操作按钮 -->
+                <template slot="action">
+                    <button>操作</button>
+                </template>
+
+                <!-- 顶部导航栏区域 -->
+                <wlin-tabs-item name="home">首页</wlin-tabs-item>
+                <wlin-tabs-item name="video">视频</wlin-tabs-item>
+                <wlin-tabs-item name="setting">
+                    <wlin-icon style="position:relative;top:2px;left:2px;" name="setting"></wlin-icon>
+                    设置
+                </wlin-tabs-item>
+            </wlin-tabs-head>
+
+            <wlin-tabs-body>
+                <wlin-tabs-pane name="home">首页内容</wlin-tabs-pane>
+                <wlin-tabs-pane name="video">视频内容</wlin-tabs-pane>
+                <wlin-tabs-pane name="setting">设置内容</wlin-tabs-pane>
+
+            </wlin-tabs-body>
+        </wlin-tabs>
+
 
         <!-- toast组件 -->
-        <button @click='showToastTop'>测试toastTop</button>
+        <!-- <button @click='showToastTop'>测试toastTop</button>
         <button @click='showToastBottom'>测试toastBottom</button>
-        <button @click='showToastMiddle'>测试toastMiddle</button>
+        <button @click='showToastMiddle'>测试toastMiddle</button> -->
 
 
         <!-- 分页组件-->
         <!-- <wlin-pager :hide-if-one-page="true" :total-page="10" :current-page="1"></wlin-pager> -->
-        <div>
+        <!-- <div>
             <span>传统模式：</span><wlin-my-test ></wlin-my-test>
-        </div>
+        </div> -->
         <!-- <div>
             <span>简单模式：</span><wlin-my-test simple></wlin-my-test>
         </div> -->
