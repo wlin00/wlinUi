@@ -32,13 +32,15 @@
             switchTab(){
 
               // 点击后，通知中心改变当前选中的tab名
-              this.eventBus.$emit('update:selected', this.name)
+              this.eventBus.$emit('input', this.name)
+              this.eventBus.$emit('change', this.name)
             }
         },
         created () {
-            this.eventBus.$on('update:selected', (value) => {
+            this.eventBus.$on('input', (value) => {
                 this.active = value === this.name
             })
+            
         },
     }
 </script>

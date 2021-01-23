@@ -1,34 +1,37 @@
 // app.js用以引入各个模块依赖
 import Vue from 'vue'
-import Button from './button'
-import Icon from './icon'
-import ButtonGroup from './button-group'
-import Input from './input'
-import Row from './row'
-import Col from './col'
-import Header from './header'
-import Content from './content'
-import Footer from './footer'
-import Layout from './layout'
-import Sider from './sider'
-import Pager from './pager'
-import Toast from './toast'
 
-import Tabs from './tabs'
-import TabsBody from './tabs-body'
-import TabsHead from './tabs-head'
-import TabsItem from './tabs-item'
-import TabsPane from './tabs-pane'
+// 图标
+import Icon from './components/icon/icon.vue'
+// 按钮
+import Button from './components/button/button.vue'
+import ButtonGroup from './components/button/button-group'
+// 输入框
+import Input from './components/input/input.vue'
+// layout布局组件
+import Row from './components/layout/row.vue'
+import Col from './components/layout/col.vue'
+// 布局容器组件
+import Header from './components/container/header.vue'
+import Content from './components/container/content.vue'
+import Footer from './components/container/footer.vue'
+import Layout from './components/container/layout.vue'
+import Sider from './components/container/sider.vue'
+// 分页组件
+import Pager from './components/pager/pager.vue'
+// 轻提示组件
+import Toast from './components/toast/toast-plugin'
+
+// tab组件
+import Tabs from './components/tabs/tabs.vue'
+import TabsBody from './components/tabs/tabs-body.vue'
+import TabsHead from './components/tabs/tabs-head.vue'
+import TabsItem from './components/tabs/tabs-item.vue'
+import TabsPane from './components/tabs/tabs-pane.vue'
 
 
 //测试其他组件
 import MyTest from './myTest'
-//toast
-import ToastPlugin from './toast-plugin'
-
-
-
-
 // 引入chai.js用于断言，进行单元测试;引入chai-spies进行mock
 import chai from 'chai'
 import spies from 'chai-spies'
@@ -49,8 +52,7 @@ Vue.component('wlin-footer',Footer)
 Vue.component('wlin-layout',Layout)
 Vue.component('wlin-sider',Sider)
 Vue.component('wlin-pager',Pager)
-Vue.component('wlin-toast',Toast)
-
+// Vue.component('wlin-toast',Toast)
 Vue.component('wlin-tabs',Tabs)
 Vue.component('wlin-tabs-head',TabsHead)
 Vue.component('wlin-tabs-body',TabsBody)
@@ -61,7 +63,7 @@ Vue.component('wlin-tabs-pane',TabsPane)
 Vue.component('wlin-my-test',MyTest)
 
 // 安装toast插件
-Vue.use(ToastPlugin)
+Vue.use(Toast)
 
 
 
@@ -73,7 +75,8 @@ new Vue({
         loading3: false,
 
         // 当前选中的tab名
-        selectedTab: 'video'
+        selectedTab: 'video',
+        page: 2
     },
     methods:{
         showToastTop(){
@@ -118,11 +121,12 @@ new Vue({
         // },
       })
     },
-        // 关闭toast后的回调
+    // 关闭toast后的回调
     handleClose() {
       console.log('hhha')
       }
-    }
+    },
+  
 })
 
 // 单元测试语句

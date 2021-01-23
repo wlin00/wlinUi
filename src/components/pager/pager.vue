@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import Icon from "./icon";
+import Icon from "../icon/icon";
 export default {
   name: "wlinPager",
   components: {
@@ -250,7 +250,7 @@ export default {
 .wlin-pager {
   user-select: none;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   &-separator {
     width: 20px;
@@ -284,7 +284,7 @@ export default {
     }
   }
   &-select {
-    width: 70px;
+    width: 45px;
     > select {
       width: 100%;
     }

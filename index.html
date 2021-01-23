@@ -45,16 +45,17 @@
 <body>
 
 
-    <div id="app">
+    <div id="app" style="overflow-y: auto;">
 
-        <!-- tab组件 -->
-        <wlin-tabs :selected.sync="selectedTab">
+        <!-- tab组件事件监听 -->
+        <wlin-my-test ></wlin-my-test>
+        <!-- tab组件常规 -->
+        <wlin-tabs v-model="selectedTab">
             <wlin-tabs-head>
                 <!-- 顶部操作按钮 -->
                 <template slot="action">
                     <button>操作</button>
                 </template>
-
                 <!-- 顶部导航栏区域 -->
                 <wlin-tabs-item name="home">首页</wlin-tabs-item>
                 <wlin-tabs-item name="video">视频</wlin-tabs-item>
@@ -63,24 +64,22 @@
                     设置
                 </wlin-tabs-item>
             </wlin-tabs-head>
-
             <wlin-tabs-body>
                 <wlin-tabs-pane name="home">首页内容</wlin-tabs-pane>
                 <wlin-tabs-pane name="video">视频内容</wlin-tabs-pane>
                 <wlin-tabs-pane name="setting">设置内容</wlin-tabs-pane>
-
             </wlin-tabs-body>
         </wlin-tabs>
 
 
         <!-- toast组件 -->
-        <!-- <button @click='showToastTop'>测试toastTop</button>
+        <button @click='showToastTop'>测试toastTop</button>
         <button @click='showToastBottom'>测试toastBottom</button>
-        <button @click='showToastMiddle'>测试toastMiddle</button> -->
+        <button @click='showToastMiddle'>测试toastMiddle</button>
 
 
         <!-- 分页组件-->
-        <!-- <wlin-pager :hide-if-one-page="true" :total-page="10" :current-page="1"></wlin-pager> -->
+        <wlin-pager :hide-if-one-page="true" :total-page="10" v-model="page"></wlin-pager>
         <!-- <div>
             <span>传统模式：</span><wlin-my-test ></wlin-my-test>
         </div> -->
@@ -91,14 +90,14 @@
 
 
         <!-- 布局组件区域 -->
-        <!-- <wlin-layout style="height: 100vh;">
+        <wlin-layout style="height: 50vh;">
             <wlin-sider style="width: 200px;" class="demo">sider</wlin-sider>
             <wlin-layout>
                 <wlin-header class="demo">header</wlin-header>
                 <wlin-content class="demo">content</wlin-content>
                 <wlin-footer class="demo">footer</wlin-footer>
             </wlin-layout>
-        </wlin-layout> -->
+        </wlin-layout>
 
 
         <!-- row-col 栅格组件区域 -->
@@ -156,32 +155,32 @@
                 >2</wlin-col>
             </wlin-row> -->
 
-            <!-- <wlin-row gutter='20' >
+            <wlin-row gutter='20' >
                 <wlin-col span='4'>1</wlin-col>
                 <wlin-col span='20'>2</wlin-col>
-            </wlin-row> -->
+            </wlin-row>
         <!-- </div> -->
 
         <!-- input 组件区域 -->
-        <!-- <div style="margin-top: 20px;">
+        <div style="margin-top: 20px;">
           <wlin-input value='张三1'></wlin-input>
           <wlin-input value='张三2' disabled></wlin-input>
           <wlin-input value='张三3' readonly></wlin-input>
           <wlin-input value='张三4' error='您输入的名称已存在'></wlin-input>
-        </div> -->
+        </div>
 
         <!-- button 组件区域 -->
         <!-- <div style="margin-top: 20px;"> -->
-            <!-- <wlin-button :loading='loading1' @click='loading1 = !loading1'>按钮</wlin-button>
+            <wlin-button :loading='loading1' @click='loading1 = !loading1'>按钮</wlin-button>
             <wlin-button icon='thumbs-up' icon-position='right' :loading='loading2' @click='loading2 = !loading2'>按钮
             </wlin-button>
-            <wlin-button icon='setting' :loading='loading3' @click='loading3 = !loading3'>按钮</wlin-button> -->
+            <wlin-button icon='setting' :loading='loading3' @click='loading3 = !loading3'>按钮</wlin-button>
             <!-- 分页按钮区域 -->
-            <!-- <wlin-button-group>
+            <wlin-button-group>
                 <wlin-button icon='left'>上一页</wlin-button>
                 <wlin-button>更多</wlin-button>
                 <wlin-button icon='right' icon-position='right'>下一页</wlin-button>
-            </wlin-button-group> -->
+            </wlin-button-group>
         <!-- </div> -->
 
         <!-- button组件的单元测试 -->

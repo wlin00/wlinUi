@@ -25,7 +25,7 @@
         methods: {
         },
         created () {
-            this.eventBus.$on('update:selected', (value) => {
+            this.eventBus.$on('input', (value) => {
                 this.active = value === this.name
             })
             // console.log(this.eventBus)
