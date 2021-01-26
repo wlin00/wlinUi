@@ -151,7 +151,10 @@ export default {
     },
     //处理分页组件点击的跳转
     handleJump(){
-      let pageNo = document.querySelector('#inp').value === "" ? 1 : Number( document.querySelector('#inp').value )
+      if(!document.querySelector('#inp').value || !/^[0-9]+$/.test(Number(document.querySelector('#inp').value))){
+        return
+      }
+      let pageNo = Number(document.querySelector('#inp').value)
       if(1 <= pageNo && pageNo <= this.totalPage){
       // this.$emit("update:currentPage",pageNo)
       // this.$nextTick(()=>{

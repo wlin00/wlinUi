@@ -21,13 +21,14 @@ import Sider from './components/container/sider.vue'
 import Pager from './components/pager/pager.vue'
 // 轻提示组件
 import Toast from './components/toast/toast-plugin'
-
 // tab组件
 import Tabs from './components/tabs/tabs.vue'
 import TabsBody from './components/tabs/tabs-body.vue'
 import TabsHead from './components/tabs/tabs-head.vue'
 import TabsItem from './components/tabs/tabs-item.vue'
 import TabsPane from './components/tabs/tabs-pane.vue'
+// Popover组件
+import Popover from './components/popover/popover.vue'
 
 
 //测试其他组件
@@ -58,6 +59,7 @@ Vue.component('wlin-tabs-head',TabsHead)
 Vue.component('wlin-tabs-body',TabsBody)
 Vue.component('wlin-tabs-item',TabsItem)
 Vue.component('wlin-tabs-pane',TabsPane)
+Vue.component('wlin-popover', Popover)
 
 
 Vue.component('wlin-my-test',MyTest)

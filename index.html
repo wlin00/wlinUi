@@ -46,17 +46,46 @@
 
 
     <div id="app" style="overflow-y: auto;">
+        <div class="wrap" style="width: 100%;box-sizing: border-box;padding:150px 0 50px 50px">
+          <!-- popover组件 - top方向 -->
+          <wlin-popover>
+            <template>
+              <div style="height: 30px;">popover-content</div>
+            </template>
+            <wlin-button slot="reference">点击</wlin-button>
+          </wlin-popover>
+          <!-- popover组件 - bottom方向 -->
+          <wlin-popover position="bottom">
+            <template>
+              <div style="height: 30px;">popover-content</div>
+            </template>
+            <wlin-button slot="reference">点击</wlin-button>
+          </wlin-popover>
+            <!-- popover组件 - left方向 -->
+          <wlin-popover position="left">
+            <template>
+              <div style="height: 30px;">popover-content</div>
+            </template>
+            <wlin-button slot="reference">点击</wlin-button>
+          </wlin-popover>
+          <!-- popover组件 - right方向 -->
+          <wlin-popover position="right">
+            <template>
+              <div style="height: 30px;">popover-content</div>
+            </template>
+            <wlin-button slot="reference">点击</wlin-button>
+          </wlin-popover>
+        </div>
 
         <!-- tab组件事件监听 -->
         <wlin-my-test ></wlin-my-test>
+       
         <!-- tab组件常规 -->
-        <wlin-tabs v-model="selectedTab">
+        <!-- <wlin-tabs v-model="selectedTab">
             <wlin-tabs-head>
-                <!-- 顶部操作按钮 -->
                 <template slot="action">
                     <button>操作</button>
                 </template>
-                <!-- 顶部导航栏区域 -->
                 <wlin-tabs-item name="home">首页</wlin-tabs-item>
                 <wlin-tabs-item name="video">视频</wlin-tabs-item>
                 <wlin-tabs-item name="setting">
@@ -69,7 +98,7 @@
                 <wlin-tabs-pane name="video">视频内容</wlin-tabs-pane>
                 <wlin-tabs-pane name="setting">设置内容</wlin-tabs-pane>
             </wlin-tabs-body>
-        </wlin-tabs>
+        </wlin-tabs> -->
 
 
         <!-- toast组件 -->
@@ -79,7 +108,7 @@
 
 
         <!-- 分页组件-->
-        <wlin-pager :hide-if-one-page="true" :total-page="10" v-model="page"></wlin-pager>
+        <!-- <wlin-pager :hide-if-one-page="true" :total-page="10" v-model="page"></wlin-pager> -->
         <!-- <div>
             <span>传统模式：</span><wlin-my-test ></wlin-my-test>
         </div> -->
