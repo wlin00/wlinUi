@@ -46,7 +46,7 @@
 
 
     <div id="app" style="overflow-y: auto;">
-        <div class="wrap" style="width: 100%;box-sizing: border-box;padding:150px 0 50px 50px">
+        <div class="wrap" style="width: 100%;box-sizing: border-box;padding:80px 0 60px 50px">
           <!-- popover组件 - top方向 -->
           <wlin-popover>
             <template>
@@ -70,6 +70,37 @@
           </wlin-popover>
           <!-- popover组件 - right方向 -->
           <wlin-popover position="right">
+            <template>
+              <div style="height: 30px;">popover-content</div>
+            </template>
+            <wlin-button slot="reference">点击</wlin-button>
+          </wlin-popover>
+        </div>
+
+        <div class="wrap" style="width: 100%;box-sizing: border-box;padding:0 0 100px 50px">
+          <!-- popover组件 - top方向 -->
+          <wlin-popover trigger="hover">
+            <template>
+              <div style="height: 30px;">popover-content</div>
+            </template>
+            <wlin-button slot="reference">点击</wlin-button>
+          </wlin-popover>
+          <!-- popover组件 - bottom方向 -->
+          <wlin-popover position="bottom" trigger="hover">
+            <template>
+              <div style="height: 30px;">popover-content</div>
+            </template>
+            <wlin-button slot="reference">点击</wlin-button>
+          </wlin-popover>
+            <!-- popover组件 - left方向 -->
+          <wlin-popover position="left" trigger="hover">
+            <template>
+              <div style="height: 30px;">popover-content</div>
+            </template>
+            <wlin-button slot="reference">点击</wlin-button>
+          </wlin-popover>
+          <!-- popover组件 - right方向 -->
+          <wlin-popover position="right" trigger="hover">
             <template>
               <div style="height: 30px;">popover-content</div>
             </template>

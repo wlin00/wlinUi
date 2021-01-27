@@ -1,5 +1,5 @@
 <template>
-  <div class="wlin-popover" @click="handleClick" ref="popover">
+  <div class="wlin-popover" ref="popover">
     <div class="wlin-popover__content" :class="{[`wlin-popover__content--${position}`]:true}" ref="contentWrapper" v-if="visible">
       <slot></slot>
     </div>
@@ -14,7 +14,23 @@
     name: 'wlinPopover',
     components: {
     },
+    mounted() {
+      if (this.trigger === 'click') {
+        // 判断当前触发事件， 并给popover增加相应的事件监听
+        this.$refs.popover.addEventListener('click', this.handleClick)
+      } else if (this.trigger === 'hover') {
+        this.$refs.popover.addEventListener('mouseover', this.open)
+        this.$refs.popover.addEventListener('mouseleave', this.close) // 移出时，添加定时器：200ms后再进行popover的关闭，若检测到鼠标进入popover弹框，则消除定时器
+      }
+    },
     props: {
+      trigger: {
+        type: String,
+        default: 'click',
+        validator (value) {
+          return ['click', 'hover'].indexOf(value) >= 0
+        }
+      },
       position: {
         type: String,
         default: 'top',
@@ -25,7 +41,8 @@
     },
     data() {
       return {
-        visible: false
+        visible: false,
+        timers: null
       }
     },
     methods: {
@@ -60,21 +77,26 @@
         // 获取当前的trigger-dom的位置
         let { width, height, top, left } = triggerWrapper.getBoundingClientRect()
         let { width: widthContent, height: heightContent } = contentWrapper.getBoundingClientRect()
-
-        if (this.position === 'top') {
-          contentWrapper.style.top = top + scrollY + 'px'
-          contentWrapper.style.left = left + scrollX + 'px'
-        } else if (this.position === 'bottom') {
-          contentWrapper.style.top = top + height + scrollY + 'px'
-          contentWrapper.style.left = left + scrollX + 'px'
-        } else if (this.position === 'left') {
-          contentWrapper.style.top = top + scrollY + (height - heightContent) / 2 + 'px'
-          contentWrapper.style.left = left + scrollX +  'px'
-        } else if (this.position === 'right') {
-          contentWrapper.style.top = top + scrollY + (height - heightContent) / 2 + 'px'
-          contentWrapper.style.left = left + scrollX + width + 'px'
+        const positions = { // 表格驱动编程
+          top: {
+            top: top + window.scrollY,
+            left: left + window.scrollX
+          },
+          bottom: {
+            top: top + height + scrollY,
+            left: left + scrollX
+          },
+          left: {
+            top: top + scrollY + (height - heightContent) / 2,
+            left: left + scrollX
+          },
+          right: {
+            top: top + scrollY + (height - heightContent) / 2,
+            left: left + scrollX + width
+          }
         }
-
+        contentWrapper.style.top = positions[this.position].top + 'px'
+        contentWrapper.style.left = positions[this.position].left + 'px'
       },
       eventHandler(e) {
         // 事件处理器 - 用于监听页面中其他位置再次触发后的popover关闭
@@ -87,6 +109,19 @@
           return
         }
         this.close()
+      },
+      delayClose(e) {
+        this.$refs.contentWrapper.addEventListener('mouseover', () => {
+          this.timers = null
+          clearTimeout(this.timers)
+          this.$refs.contentWrapper.addEventListener('mouseleave', () => {
+            this.close()
+          })
+        })
+        clearTimeout(this.timers)
+        this.timers = setTimeout(() => {
+            this.close()
+          }, 200)
       }
     },
     
@@ -107,6 +142,9 @@
       border: 1px solid #000;
       border-radius: 3px;
       z-index: 10;
+      // box-shadow: 0 0 2px black;
+      
+      filter: drop-shadow(0 0 2px #000);
       background: #fff;
       &::before, &::after{
         // 三角形统一样式
@@ -118,7 +156,7 @@
         height: 0;
       }
       &--top{
-        margin-top: -13px;
+        margin-top: -10px;
         transform: translateY(-100%); // 将popover弹层放置在trigger触发器上方
         &::before, &::after{
           left: 10px; // 三角形统一偏移量
@@ -126,18 +164,20 @@
         &::before{
           // 构建遮盖小三角形， 和底色一致，用于抬高1px遮盖
           border-top-color:#000;
+          border-bottom: none;
           top: 100%;
           border-radius: 5px;
         }
         &::after{
           // 构建着色小三角形
           border-top-color:white;
+          border-bottom: none;
           top: calc(100% - 1px);
           border-radius: 5px;
         }
       }
       &--bottom{
-        margin-top: 13px;
+        margin-top: 11px;
         // transform: translateY(100%); // 将popover弹层放置在trigger触发器上方
         &::before, &::after{
           left: 10px; // 三角形统一偏移量
@@ -145,36 +185,39 @@
         &::before{
           // 构建着色小三角形
           border-bottom-color:#000;
+          border-top: none;
           bottom: 100%;
         }
         &::after{
           // 构建遮盖小三角形， 和底色一致，用于抬高1px遮盖
           border-bottom-color:white;
+          border-top: none;
           bottom: calc(100% - 1px);
         }
       }
       &--left{
         transform: translateX(-100%); // 将popover弹层放置在trigger触发器上方
-        margin-left: -13px;
+        margin-left: -10px;
         &::before, &::after{
           // 三角形统一偏移量
           top: 50%;
           transform: translateY(-50%);
         }
         &::before{
-         
            // 构建着色小三角形
           border-left-color:#000;
+          border-right: none;
           left: 100%;
         }
         &::after{
           // 构建遮盖小三角形， 和底色一致，用于左移1px遮盖
           border-left-color:white;
+          border-right: none;
           left: calc(100% - 1px);
         }
       }
       &--right{
-        margin-left: 13px;
+        margin-left: 10px;
         &::before, &::after{
           // 三角形统一偏移量
           top: 50%;
@@ -183,11 +226,13 @@
         &::before{
            // 构建着色小三角形
           border-right-color:#000;
+          border-left: none;
           right: 100%;
         }
         &::after{
           // 构建遮盖小三角形， 和底色一致，用于左移1px遮盖
           border-right-color:white;
+          border-left: none;
           right: calc(100% - 1px);
         }
       }
