@@ -20,7 +20,7 @@
         this.$refs.popover.addEventListener('click', this.handleClick)
       } else if (this.trigger === 'hover') {
         this.$refs.popover.addEventListener('mouseover', this.open)
-        this.$refs.popover.addEventListener('mouseleave', this.close) // 移出时，添加定时器：200ms后再进行popover的关闭，若检测到鼠标进入popover弹框，则消除定时器
+        this.$refs.popover.addEventListener('mouseleave', this.delayClose) // 移出时，添加定时器：200ms后再进行popover的关闭，若检测到鼠标进入popover弹框，则消除定时器
       }
     },
     props: {
@@ -111,15 +111,15 @@
         this.close()
       },
       delayClose(e) {
+        let timer
         this.$refs.contentWrapper.addEventListener('mouseover', () => {
-          this.timers = null
-          clearTimeout(this.timers)
+          clearTimeout(timer)
+          timer = null
           this.$refs.contentWrapper.addEventListener('mouseleave', () => {
             this.close()
           })
         })
-        clearTimeout(this.timers)
-        this.timers = setTimeout(() => {
+        timer = setTimeout(() => {
             this.close()
           }, 200)
       }
