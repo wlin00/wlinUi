@@ -1,2 +1,2 @@
-vue ui组件库
-作者：wlin00
+An ui component library built on vue.js
+Author：wlin00
