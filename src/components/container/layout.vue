@@ -22,7 +22,6 @@
                 console.log(e.$options.name)
                 if(e.$options.name === 'WlinSider'){
                     this.layoutClass.hasSider = true
-
                 }
             })
 

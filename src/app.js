@@ -29,6 +29,10 @@ import TabsItem from './components/tabs/tabs-item.vue'
 import TabsPane from './components/tabs/tabs-pane.vue'
 // Popover组件
 import Popover from './components/popover/popover.vue'
+// Collapse组件
+import Collapse from './components/collapse/collapse.vue'
+import CollapseItem from './components/collapse/collapse-item.vue'
+
 
 
 //测试其他组件
@@ -37,7 +41,6 @@ import MyTest from './myTest'
 import chai from 'chai'
 import spies from 'chai-spies'
 chai.use(spies)
-
 
 
 //声明全局的组件
@@ -53,20 +56,22 @@ Vue.component('wlin-footer',Footer)
 Vue.component('wlin-layout',Layout)
 Vue.component('wlin-sider',Sider)
 Vue.component('wlin-pager',Pager)
-// Vue.component('wlin-toast',Toast)
 Vue.component('wlin-tabs',Tabs)
 Vue.component('wlin-tabs-head',TabsHead)
 Vue.component('wlin-tabs-body',TabsBody)
 Vue.component('wlin-tabs-item',TabsItem)
 Vue.component('wlin-tabs-pane',TabsPane)
 Vue.component('wlin-popover', Popover)
+Vue.component('wlin-collapse', Collapse)
+Vue.component('wlin-collapse-item', CollapseItem)
+
+
 
 
 Vue.component('wlin-my-test',MyTest)
 
 // 安装toast插件
 Vue.use(Toast)
-
 
 
 new Vue({

@@ -36,7 +36,7 @@
     }
 }
 
-//vue动画
+//vue动画 - 左滑动关闭
 
 .hide-enter-active,.hide-leave-active{
     transition: all .8s linear;

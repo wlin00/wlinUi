@@ -75,8 +75,8 @@
         // 将popover弹窗部位放置于document.body后面， 防止组件外层Dom加上overFlow:hidden后导致的样式遮盖
         document.body.appendChild(contentWrapper)
         // 获取当前的trigger-dom的位置
-        let { width, height, top, left } = triggerWrapper.getBoundingClientRect()
-        let { width: widthContent, height: heightContent } = contentWrapper.getBoundingClientRect()
+        const { width, height, top, left } = triggerWrapper.getBoundingClientRect()
+        const { width: widthContent, height: heightContent } = contentWrapper.getBoundingClientRect()
         const positions = { // 表格驱动编程
           top: {
             top: top + window.scrollY,
@@ -105,7 +105,7 @@
             return
         }
         if (this.$refs.contentWrapper.contains(e.target) || this.$refs.contentWrapper === e.target) {
-          // 防止popover-content点击后的取消
+          // 防止popover-content区域内事件触发造成的取消
           return
         }
         this.close()
