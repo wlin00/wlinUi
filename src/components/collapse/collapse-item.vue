@@ -103,12 +103,14 @@
   }
 
   .slide-enter-active, .slide-leave-active{
-    transition: all .3s linear; 
+    transition: transform .3s linear; 
   }
-  .slide-enter, .slide-leave-to{
+  .slide-enter{
     // top: -100%;
     transform: translate3d(0, -100%, 0)
-
+  }
+  .slide-leave-to{
+    display: none;
   }
 }
 </style>
