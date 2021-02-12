@@ -1,5 +1,11 @@
 <template>
     <div class="myTest">
+      <wlin-collapse style="margin-bottom: 20px;" v-model="myTitle" @change="handleCollapseChange">
+        <wlin-collapse-item title='标题1'>内容1</wlin-collapse-item>
+        <wlin-collapse-item title='标题2'>内容2</wlin-collapse-item>
+        <wlin-collapse-item title='标题3'>内容3</wlin-collapse-item>
+      </wlin-collapse>
+
       <wlin-pager 
           v-model="pageNo" 
           :total-page="pageSize" 
@@ -38,6 +44,9 @@ import TabsHead from './components/tabs/tabs-head'
 import TabsBody from './components/tabs/tabs-body'
 import TabsItem from './components/tabs/tabs-item'
 import TabsPane from './components/tabs/tabs-pane'
+// Collapse组件
+import Collapse from './components/collapse/collapse.vue'
+import CollapseItem from './components/collapse/collapse-item.vue'
 
     export default {
         props: {
@@ -53,6 +62,8 @@ import TabsPane from './components/tabs/tabs-pane'
           'wlin-tabs-body':TabsBody,
           'wlin-tabs-item':TabsItem,
           'wlin-tabs-pane':TabsPane,
+          'wlin-collapse':Collapse,
+          'wlin-collapse-item':CollapseItem,
         },
         methods: {
             onPageSizeChange(e) {
@@ -70,7 +81,9 @@ import TabsPane from './components/tabs/tabs-pane'
             },
             handleTabChange(e) {
               console.log('tab-change', e)
-
+            },
+            handleCollapseChange(val) {
+              console.log('collapse-change', val)
             }
         },
         data() {
@@ -78,6 +91,7 @@ import TabsPane from './components/tabs/tabs-pane'
                 pageNo: 1,
                 pageSize: 150,
                 selectedTab: 'video',
+                myTitle: '标题3'
             }
         },
     }
@@ -86,6 +100,6 @@ import TabsPane from './components/tabs/tabs-pane'
 <style lang="scss" scoped>
 .myTest{
     // display: flex;
-    width: 100%;
+    width: 100%;box-sizing: border-box;padding:80px 0 60px 50px
 }
 </style>

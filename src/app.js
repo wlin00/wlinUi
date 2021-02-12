@@ -83,7 +83,8 @@ new Vue({
 
         // 当前选中的tab名
         selectedTab: 'video',
-        page: 2
+        page: 2,
+        myTitle: '标题2'
     },
     methods:{
         showToastTop(){
@@ -133,6 +134,11 @@ new Vue({
       console.log('hhha')
       }
     },
+    // 走马灯的改变回调
+    handleCollapseChange(val) {
+      console.log('change', val)
+      
+    }
   
 })
 

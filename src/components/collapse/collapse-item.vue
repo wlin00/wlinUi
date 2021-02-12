@@ -1,17 +1,23 @@
 <template>
-  <div class="wlin-collapse-item">
-    <div class="wlin-collapse-item__title" @click="visible = !visible">
-      {{ title }}
+    <div class="wlin-collapse-item">
+      <div class="wlin-collapse-item__title" @click="handleClick">
+        {{ title }}
+      </div>
+      <div style="width:100%;overflow:hidden;">
+        <transition name="slide">
+          <div class="wlin-collapse-item__content" v-if="visible">
+            <slot></slot>
+          </div>
+        </transition>
+      </div>
+  
     </div>
-    <div class="wlin-collapse-item__content" v-show="visible">
-      <slot></slot>
-    </div>
-  </div>
 </template>
 
 <script>
   export default {
     name: 'wlinCollapseItem',
+    inject: ['eventBus'],
     props: {
       title: {
         type: String,
@@ -20,10 +26,41 @@
     },
     data() {
       return {
-        visible: false
+        visible: false,
+        single: false
       }
     },
     methods: {
+      handleClick() {
+
+        if (this.single) { // 根据当前是否单选模式改变click方法
+          this.eventBus.$emit('input', this.title)
+          this.eventBus.$emit('change', this.title)
+        } else {
+          this.eventBus.$emit('input', this.title)
+          this.eventBus.$emit('change', this.title)
+        }
+      
+      }
+    },
+    created() {
+      this.eventBus && this.eventBus.$on('input', (val) => {
+
+        console.log('val',this.title, val, this.visible)
+
+        if (this.single) {
+          this.visible = val === this.title && !this.visible
+        } else {
+          if (val === this.title) {
+            this.visible = !this.visible
+          }
+          // this.visible = val === this.title && !this.visible
+        }
+
+        console.log('res', this.visible)
+
+      })
+    
     }
   }
 </script>
@@ -32,6 +69,7 @@
 .wlin-collapse-item{
   width: 100%;
   user-select: none;
+  box-sizing: border-box;
   &__title{
     border: 1px solid #ddd;
     margin-top: -1px;
@@ -44,6 +82,7 @@
     &:first-child{
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
+      margin-top: -2px;
     }
     &:last-child{
       border-bottom-left-radius: 4px;
@@ -63,11 +102,13 @@
     }
   }
 
-  .slide-enter-active, .slide-leave-active {
-    transition: opacity 2s;
+  .slide-enter-active, .slide-leave-active{
+    transition: all .3s linear; 
   }
-  .slide-enter, .slide-leave-to {
-     transform: translateY(-100%);
+  .slide-enter, .slide-leave-to{
+    // top: -100%;
+    transform: translate3d(0, -100%, 0)
+
   }
 }
 </style>
