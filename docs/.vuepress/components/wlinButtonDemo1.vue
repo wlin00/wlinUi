@@ -13,15 +13,34 @@
       <strong>代码</strong>
     </p>
     <pre><code>{{content}}</code></pre>
+
+    <!-- button-group -->
+     <h2>按钮组合</h2>
+    <p>
+      <strong>预览</strong>
+    </p>
+    <wlin-button-group>
+      <wlin-button icon='left'>上一页</wlin-button>
+      <wlin-button>更多</wlin-button>
+      <wlin-button icon='right' icon-position='right'>下一页</wlin-button>
+    </wlin-button-group>
+
+    <p>
+      <strong>代码</strong>
+    </p>
+    <pre><code>{{contentGroup}}</code></pre>
   </div>
 </template>
 <script>
   import Button from '../../../src/components/button/button'
+  import ButtonGroup from '../../../src/components/button/button-group'
+
 
   export default {
     name: 'wlinButtonDemo',
     components: {
-      'wlin-button': Button
+      'wlin-button': Button,
+      'wlin-button-group': ButtonGroup,
     },
     data () {
       return {
@@ -31,7 +50,14 @@
           <wlin-button icon="settings">默认按钮</wlin-button>
           <wlin-button :loading="true">默认按钮</wlin-button>
           <wlin-button disabled>默认按钮</wlin-button>
-      `.replace(/^ {8}/gm, '').trim()
+      `.replace(/^ {8}/gm, '').trim(),
+        contentGroup: `
+          <wlin-button-group>
+          <wlin-button icon='left'>上一页</wlin-button>
+          <wlin-button>更多</wlin-button>
+          <wlin-button icon='right' icon-position='right'>下一页</wlin-button>
+          </wlin-button-group>
+        `.replace(/^ {}/gm, '').trim()
       }
     }
   }

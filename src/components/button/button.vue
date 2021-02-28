@@ -53,7 +53,7 @@ export default {
     font-size: 14px;
     height: 32px;
     padding: 0 1em;
-    border-radius: 32px;
+    border-radius: 5px;
     border: 1px solid #999;
     background: white;
     display: inline-flex;

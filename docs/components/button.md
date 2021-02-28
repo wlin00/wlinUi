@@ -4,7 +4,7 @@ title: Button
 # 按钮
 
 <ClientOnly>
-  <wlin-button-demo></wlin-button-demo>
+  <wlin-button-demo1></wlin-button-demo1>
 </ClientOnly>
 
 

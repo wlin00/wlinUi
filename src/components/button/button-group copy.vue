@@ -33,7 +33,7 @@
           }
           &:not(:first-child){
               //选择所有非第一个孩子的节点，进行左移动1px
-              margin-left: -1px;
+              margin-left: -2px;
           }
           &:hover{
               //hover某一个buttonGroup内部的button时，增加其显示层级、border颜色调整。

@@ -46,7 +46,7 @@ export default {
   font-size: 14px;
   height: 32px;
   padding: 0 1em;
-  border-radius: 32px;
+  border-radius: 5px;
   border: 1px solid #999;
   background: white;
   //button组件采用flex布局，方便设置icon的方向
