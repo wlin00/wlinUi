@@ -4,10 +4,10 @@
     <p>
       <strong>预览</strong>
     </p>
-    <wlin-button :loading="loading1" @click="loading1 = !loading1">默认按钮</wlin-button>
-    <wlin-button icon="settings">默认按钮</wlin-button>
-    <wlin-button :loading="true">默认按钮</wlin-button>
-    <wlin-button disabled>默认按钮</wlin-button>
+    <wlin-button style="margin-bottom: 10px;" :loading="loading1" @click="loading1 = !loading1">默认按钮</wlin-button>
+    <wlin-button style="margin-bottom: 10px;" icon="settings">默认按钮</wlin-button>
+    <wlin-button style="margin-bottom: 10px;" :loading="true">默认按钮</wlin-button>
+    <wlin-button style="margin-bottom: 10px;" disabled>默认按钮</wlin-button>
 
     <p>
       <strong>代码</strong>

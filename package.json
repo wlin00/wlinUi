@@ -10,6 +10,7 @@
     "build": "npx parcel build index.js --no-minify --no-cache",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "docs-build": "npx vuepress build docs",
     "docs": "npx vuepress dev docs"
   },
   "repository": {

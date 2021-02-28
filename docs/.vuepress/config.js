@@ -6,8 +6,8 @@ module.exports = {
   themeConfig: {
     nav: [
       {text: '主页', link: '/'},
-      {text: '文档', link: '/guide/'},
-      {text: '交流', link: 'https://google.com'},
+      {text: 'github', link: 'https://github.com/wlin00'},
+      {text: '博客', link: 'https://wlin00.github.io/'},
     ],
     sidebar: [
       {
