@@ -2,6 +2,8 @@ An ui component library built on vue.js.
 
 Author：wlin00.  
 
+项目地址：https://wlin00.github.io/wlinUi/
+
 wlin UI 是一个基于vue的ui组件库。
 
 本 UI 框架是一个「面向源码阅读者」的框架。如果对你有帮助，请不要吝惜你的 star。
