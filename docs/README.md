@@ -1,12 +1,12 @@
-An ui component library built on vue.js.  
+# wlin UI
 
-Author：wlin00.  
+<!-- [官方文档](https://frankfang.github.io/gulu/) -->
 
 wlin UI 是一个基于vue的ui组件库。
 
 本 UI 框架是一个「面向源码阅读者」的框架。如果对你有帮助，请不要吝惜你的 star。
 
-如果你对代码有疑问，欢迎[提issue](https://github.com/wlin00/wlinUi)，我会回答倾听您的意见和建议。
+如果你对代码有疑问，欢迎[提issue](https://github.com/frankfang/gulu/issues)，我会回答你的疑问。
 
 本 UI 框架是基于 Vue 2 实现的。
 
@@ -26,7 +26,7 @@ wlin UI 是一个基于vue的ui组件库。
 1. 使用 Travis CI 进行持续集成
 2. 有丰富的单元测试，项目完成时，期望测试覆盖率超过 90%
 3. 自说明的代码，即使没有注释，你也能看懂
-4. 初期我使用 parcel 构建方便新人上手，后期改为 Vue Cli 3 以实现更多功能
+<!-- 4. 初期我使用 parcel 构建方便新人上手，后期改为 Vue Cli 3 以实现更多功能 -->
 
 ## 源码学习
 
@@ -39,4 +39,3 @@ wlin UI 是一个基于vue的ui组件库。
     ```
     yarn serve
     ```
-

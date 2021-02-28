@@ -5,9 +5,12 @@
   "main": "dist/index.js",
   "scripts": {
     "dev-test": "parcel watch test/* --no-cache & karma start",
-     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
-     "start": "npx parcel index.html --no-cache",
-     "build": "npx parcel build index.js --no-minify --no-cache"
+    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
+    "start": "npx parcel index.html --no-cache",
+    "build": "npx parcel build index.js --no-minify --no-cache",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs": "npx vuepress dev docs"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
   },
   "homepage": "https://github.com/wlin00/wlinUi#readme",
   "dependencies": {
+    "global": "^4.4.0",
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0"
   },
@@ -38,8 +42,9 @@
     "karma-mocha": "^2.0.1",
     "karma-sinon-chai": "^2.0.2",
     "mocha": "^8.0.1",
-    "node-sass": "^4.9.0",
+    "node-sass": "^5.0.0",
     "parcel-bundler": "^1.9.2",
+    "sass-loader": "^11.0.1",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0",
     "vue-template-compiler": "^2.5.16"
