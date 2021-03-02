@@ -61,7 +61,9 @@ export default {
     justify-content: center;
     vertical-align: middle;
   }
- 
+  .wlin-button:hover(:disabled) {
+    /* cursor: no-drop; */
+  }
   .wlin-button:hover:not(:disabled){
     border-color: #666;
   } 

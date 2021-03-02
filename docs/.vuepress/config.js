@@ -23,8 +23,9 @@ module.exports = {
         collapsable: true,
         children: [
           '/components/button',
+          '/components/input',
+
           // '/components/tabs',
-          // '/components/input',
           // '/components/grid',
           // '/components/layout',
           // '/components/toast',
