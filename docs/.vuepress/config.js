@@ -24,6 +24,12 @@ module.exports = {
         children: [
           '/components/button',
           '/components/input',
+          '/components/grid',
+          '/components/layout',
+          '/components/tabs',
+
+
+
 
           // '/components/tabs',
           // '/components/grid',
@@ -37,6 +43,8 @@ module.exports = {
     ]
   },
   scss:{
-    // includePaths: [path.join(__dirname, '../../styles')]
+    includePaths: [path.join(__dirname, '../../styles')]
+    // includePaths: ['../../styles/_var.scss', '../../styles/input.scss']
+    
   }
 }

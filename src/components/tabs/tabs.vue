@@ -39,7 +39,6 @@
             this.eventBus.$on('change', this.handleChange) // 监听tab改变的事件回调
             this.eventBus.$on('input', this.handleValueChange) // v-model：监听tab-value的改变
             this.eventBus.$emit('input', this.value) // 初始状态，将默认的tabs选中值发布给消息中心eventBus
-
         },
         // 向子代组件提供依赖，tabs根组件注册事件中心
         provide(){

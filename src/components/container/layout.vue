@@ -33,7 +33,7 @@
 <style lang="scss" scoped>
 .layout{
     display: flex;
-    border:1px solid red;
+    border:1px solid #ddd;
     flex-direction: column;
     flex-grow: 1;
 }

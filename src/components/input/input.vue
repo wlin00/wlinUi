@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :class="{ error }">
+  <div class="wlin-input-wrapper" :class="{ error }">
     <input
       type="text"
       :value="value"
@@ -59,7 +59,7 @@ $border-radius: 4px;
 $font-size: 12px;
 $box-shadow-color: rgba(0, 0, 0, 0.5);
 $red: #f1453d;
-.wrapper {
+.wlin-input-wrapper {
   font-size: $font-size;
   display: inline-flex;
   align-items: center;
@@ -99,3 +99,5 @@ $red: #f1453d;
   }
 }
 </style>
+
+

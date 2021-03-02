@@ -40,55 +40,61 @@ export default {
 }
 </script>
 
-<style lang="css">
-  @keyframes spin{
-    0%{
-      transform: rotate(0deg)
-    }
-    100%{
-      transform: rotate(360deg)
-    }
-  }
-  .wlin-button {
-    font-size: 14px;
-    height: 32px;
-    padding: 0 1em;
-    border-radius: 5px;
-    border: 1px solid #999;
-    background: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-  }
-  .wlin-button:hover(:disabled) {
-    /* cursor: no-drop; */
-  }
-  .wlin-button:hover:not(:disabled){
+<style lang="scss">
+/* button组件内部样式 */
+.wlin-button {
+  font-size: 14px;
+  height: 32px;
+  padding: 0 1em;
+  border-radius: 5px;
+  border: 1px solid #999;
+  background: white;
+  //button组件采用flex布局，方便设置icon的方向
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  &:hover {
     border-color: #666;
-  } 
-  .wlin-button:active:not(:disabled) {
+  }
+  &:active {
     background: #eee;
   }
-  .wlin-button:focus {
+  &:focus {
     outline: none;
   }
-  .wlin-button>.icon{
+  //对子代icon、slot做位置的样式约定。默认icon放在左边
+  > .icon{
     order:1;
     margin-right: .1em;
   }
-  .wlin-button>.content{
+  > .content{
     order:2
   }
-  .wlin-button.icon-right>.icon{
-    order:2;
-    margin-right: 0;
-    margin-left: .1em;
-  }
-  .wlin-button.icon-right>.content{
+  //用户若设置icon在右侧，则改变order顺序
+  &.icon-right{
+    > .icon{
+      order:2;
+      margin-right: 0;
+      margin-left: .1em;
+    }
+    > .content{
       order:1
+    }
   }
-  .wlin-button >.spinner{
+  //设置子代loading动画
+  >.spinner{
     animation: spin 2s linear infinite;
   }
+}
+//声明按钮加载时的loading旋转动画
+@keyframes spin {
+  0%{
+    transform: rotate(0deg)
+  }
+  100%{
+    transform: rotate(360deg)
+  }
+  
+}
 </style>
