@@ -4,7 +4,7 @@ let currentToast
 export default{
     install (Vue, options) {
         // message参数可以拿到用户创建toast实例时的传参
-        Vue.prototype.$toast = function (message, toastOptions) {
+        Vue.prototype.$toast = function (message, toastOptions={}) {
             // 执行toast的构造函数， 创建一个toast实例（单例模式），并判断若之前存在toast实例则销毁之前的。
             if (currentToast) currentToast.close()
             currentToast = createToast({Vue, message, callback: () => {

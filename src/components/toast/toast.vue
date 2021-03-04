@@ -168,7 +168,7 @@ $toast-bg: rgba(0, 0, 0, .75);
 
   // toast位置在上方的情况
   &.wlin-toast--top{
-    top: 0;
+    top: 60px;
     .wlin-toast{
       animation: slide-down .3s linear;
     }

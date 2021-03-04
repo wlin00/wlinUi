@@ -42,7 +42,7 @@
       </div>
       <div class="wlin-pager-jump">
         <input type="text" id="inp" :value.sync="inputValue" />
-        <span @click="handleJump">跳转</span>
+        <span @click="handleJump">Jump</span>
       </div>
     </template>
 

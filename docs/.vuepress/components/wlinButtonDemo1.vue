@@ -53,9 +53,9 @@
       `.replace(/^ {8}/gm, '').trim(),
         contentGroup: `
           <wlin-button-group>
-          <wlin-button icon='left'>上一页</wlin-button>
-          <wlin-button>更多</wlin-button>
-          <wlin-button icon='right' icon-position='right'>下一页</wlin-button>
+            <wlin-button icon='left'>上一页</wlin-button>
+            <wlin-button>更多</wlin-button>
+            <wlin-button icon='right' icon-position='right'>下一页</wlin-button>
           </wlin-button-group>
         `.replace(/^ {8}/gm, '').trim()
       }

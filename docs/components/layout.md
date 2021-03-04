@@ -1,7 +1,7 @@
 ---
 title: Layout
 ---
-# 布局
+# Layout 布局
 
 <ClientOnly>
   <wlin-layout-demo1></wlin-layout-demo1>

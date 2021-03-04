@@ -1,7 +1,7 @@
 ---
 title: Grid
 ---
-# 网格
+# Grid 网格
 
 <ClientOnly>
   <wlin-grid-demo-1></wlin-grid-demo-1>

@@ -2,10 +2,10 @@
 title: Toast
 ---
 
-# Toast
+# Toast 轻提示
 
 <ClientOnly>
-  <toast-demo-1></toast-demo-1>
-  <toast-demo-2></toast-demo-2>
-  <toast-demo-3></toast-demo-3>
+  <wlin-toast-demo1></wlin-toast-demo1>
+  <wlin-toast-demo2></wlin-toast-demo2>
+  <wlin-toast-demo3></wlin-toast-demo3>
 </ClientOnly>

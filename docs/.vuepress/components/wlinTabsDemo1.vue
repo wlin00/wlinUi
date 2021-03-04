@@ -43,21 +43,18 @@
             selected: '1'
           }
 
-           <wlin-tabs v-model="selected">
+          <wlin-tabs v-model="selected">
             <wlin-tabs-head>
               <wlin-tabs-item name="1">1</wlin-tabs-item>
               <wlin-tabs-item name="2">2</wlin-tabs-item>
               <wlin-tabs-item name="3">3</wlin-tabs-item>
-
             </wlin-tabs-head>
             <wlin-tabs-body>
               <wlin-tabs-pane name="1">content 1</wlin-tabs-pane>
               <wlin-tabs-pane name="2">content 2</wlin-tabs-pane>
               <wlin-tabs-pane name="3">content 3</wlin-tabs-pane>
-
             </wlin-tabs-body>
           </wlin-tabs>
-
       `.replace(/^ {8}/gm, '').trim()
       }
     }

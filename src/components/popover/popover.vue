@@ -156,7 +156,7 @@
         height: 0;
       }
       &--top{
-        margin-top: -10px;
+        margin-top: -11px;
         transform: translateY(-100%); // 将popover弹层放置在trigger触发器上方
         &::before, &::after{
           left: 10px; // 三角形统一偏移量
@@ -197,7 +197,7 @@
       }
       &--left{
         transform: translateX(-100%); // 将popover弹层放置在trigger触发器上方
-        margin-left: -10px;
+        margin-left: -9px;
         &::before, &::after{
           // 三角形统一偏移量
           top: 50%;

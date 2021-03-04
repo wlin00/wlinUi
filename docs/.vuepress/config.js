@@ -27,15 +27,16 @@ module.exports = {
           '/components/grid',
           '/components/layout',
           '/components/tabs',
+          '/components/popover',
+          '/components/toast',
+          '/components/pager',
 
 
 
 
-          // '/components/tabs',
-          // '/components/grid',
-          // '/components/layout',
-          // '/components/toast',
-          // '/components/popover',
+
+
+
           // '/components/slides',
         ]
       },

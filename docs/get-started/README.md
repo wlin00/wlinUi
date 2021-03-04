@@ -14,7 +14,7 @@ title: 快速上手
 ## 使用
 
 ```javascript
-import {Button} from 'gulu'
+import {Button} from 'wlinUi'
 import Vue from 'vue'
 
 new Vue({

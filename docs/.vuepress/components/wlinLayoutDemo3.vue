@@ -45,21 +45,21 @@
       return {
         content: `
         <wlin-layout style="color: white; overflow:hidden; margin-bottom:50px;">
-          <wlin-header style="height: 50px; background:lightskyblue;">
-            header
-          </wlin-header>
-          <wlin-layout>
-            <wlin-sider style="height: 100px; background:#ddd; width:200px; color: black;">
-              sider
-            </wlin-sider>
-            <wlin-content style="height: 100px; background:deepskyblue;">
-              content
-            </wlin-content>
+            <wlin-header style="height: 50px; background:lightskyblue;">
+              header
+            </wlin-header>
+            <wlin-layout>
+              <wlin-sider style="height: 100px; background:#ddd; width:200px; color: black;">
+                sider
+              </wlin-sider>
+              <wlin-content style="height: 100px; background:deepskyblue;">
+                content
+              </wlin-content>
+            </wlin-layout>
+            <wlin-footer style="height: 50px; background:lightskyblue;">
+              footer
+            </wlin-footer>
           </wlin-layout>
-          <wlin-footer style="height: 50px; background:lightskyblue;">
-            footer
-          </wlin-footer>
-        </wlin-layout>
 
       `.replace(/^ {8}/gm, '').trim()
       }
