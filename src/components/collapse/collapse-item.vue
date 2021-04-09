@@ -72,6 +72,8 @@
   box-sizing: border-box;
   &__title{
     border: 1px solid #ddd;
+    background: #fafafa;
+    cursor: pointer;
     margin-top: -1px;
     margin-left: -1px;
     margin-right: -1px;
@@ -95,6 +97,7 @@
     margin-top: -1px;
     margin-left: -1px;
     margin-right: -1px;
+    cursor: default;
     &:last-child{
       border-top: none;
       border-bottom-left-radius: 4px;

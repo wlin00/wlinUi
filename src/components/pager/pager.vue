@@ -41,7 +41,8 @@
         </select>
       </div>
       <div class="wlin-pager-jump">
-        <input type="text" id="inp" :value.sync="inputValue" />
+        <span class="font">跳至</span>
+        <input maxlength="15" type="text" id="inp" :value.sync="inputValue" />
         <span @click="handleJump">Jump</span>
       </div>
     </template>
@@ -59,7 +60,7 @@
         <div>
           <span class="wlin-pager-item simple">{{ value }}</span>
           <span class="wlin-pager-item simple">/</span>
-          <span class="wlin-pager-item simple">{{ totalPage }}</span>
+          <span class="wlin-pager-item" @click="handleJumpTotal(totalPage)">{{ totalPage }}</span>
         </div>
       </template>
       <span
@@ -148,6 +149,10 @@ export default {
         //   console.log("change", this.pages);
         // })
       }
+    },
+    handleJumpTotal(totalPage) {
+      this.$emit("input", totalPage);
+      this.$emit('change', totalPage)
     },
     //处理分页组件点击的跳转
     handleJump(){
@@ -260,24 +265,42 @@ export default {
     font-size: 12px;
   }
   &-item {
-    border: 1px solid #e1e1e1;
+    border: 1px solid rgba(0,0,0,.25);
     border-radius: 4px;
-    padding: 0 4px;
-    color: #000;
+    padding: 0 12px;
+    color: rgba(0,0,0,.65);
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
-    min-width: 22.02px; //数字较长自动撑开
-    height: 20px;
-    margin: 0 4px;
+    font-size: 14px;
+    min-width: 36px;
+    height: 32px;
+    margin-left: 8px;
+    box-sizing: border-box;
     cursor: pointer;
     &:hover {
-      border-color: rgb(56, 134, 165);
+      border-color: #4D80F0;
+      background-color: #4D80F0;
+      color: #fff;
+    }
+    &:not(.current):active {
+      opacity: .85;
     }
     &.current {
       cursor: default;
-      border-color: rgb(56, 134, 165);
+      border-color: #4D80F0;
+      background-color: #4D80F0;
+      color: #fff;
+    }
+    &.simple {
+      border: none;
+      cursor: default;
+      &:hover{
+        background-color: #fff;
+        border-color: 1px solid rgba(0,0,0,.15);
+        color: rgba(0,0,0,.65);
+        opacity: 1;
+      }
     }
   }
   &-box {
@@ -287,51 +310,95 @@ export default {
     }
   }
   &-select {
-    width: 45px;
+    width: 100px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
     > select {
-      width: 100%;
+      height: 32px;
+      width: 100px;
+      border-color: rgba(0,0,0,.25)
     }
   }
   &-jump {
-    display: inline-block;
-    margin-left: 40px;
+    display: inline-flex;
+    margin-left: 10px;
     >input{
-      display: inline-block;
-      width: 40px;
+      display: inline-flex;
+      width: 50px;
+      margin: 0 5px;
+      padding: 0 5px;
+      border-color: rgba(0,0,0,.25);
       // top: 50%;
       // transform: translateY(-50%);
     }
-    >span{
-      display: inline-block;
-      width: 36px;
+    >.font {
+      font-size: 14px;
+      color: rgba(0,0,0,.65);
+      align-items: center;
+      height: 32px;
+      display: inline-flex;
+    }
+
+    >span:last-of-type{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 50px;
+      padding: 0 12px;
+      box-sizing: border-box;
       color: #fff;
-      background-color: rgb(20, 127, 214);
-      line-height: 20px;
+      background-color: #4D80F0;
       font-size: 14px;
       cursor: pointer;
       text-align: center;
-      height: 20px;
+      height: 32px;
+      align-items: center;
       border-radius: 4px;
     }
-    >span:hover{
-      opacity: 0.7;
+    >span:last-of-type {
+      &:hover {
+        opacity: 0.7;
+      }
+      &:active {
+        opacity: .85;
+      }
     }
   }
   &-nav {
+    &.next {
+      margin-left: 8px;
+    }
     cursor: pointer;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background: rgb(104, 122, 141);
-    height: 20px;
-    width: 20px;
+    height: 32px;
+    min-width: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0,.25);
+    color: rgba(0,0,0,.65);
+    font-weight: normal;
+    box-sizing: border-box;
+    padding: 0 10px;
+    font-size: 14px;
     border-radius: 4px;
-    font-size: 12px;
-    margin: 8px 4px;
+
+    &:not(.disabled):hover {
+      background-color: #4D80F0;
+      color: #fff;
+      border-color: #4D80F0;
+    }
+    &:active {
+      opacity: .85;
+    }
     &.disabled {
-      fill: rgb(148, 162, 175);
-      background: rgb(110, 122, 136);
-      cursor: default;
+      color: rgba(0,0,0,.15);
+      fill: rgba(0,0,0,.15);
+      border-color: #d9d9d9;
+      cursor: not-allowed;
     }
   }
 }

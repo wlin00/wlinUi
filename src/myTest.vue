@@ -1,19 +1,31 @@
 <template>
     <div class="myTest">
-      <wlin-collapse style="margin-bottom: 20px;" v-model="myTitle" @change="handleCollapseChange">
+      <wlin-collapse single style="margin-bottom: 20px;" v-model="myTitle" @change="handleCollapseChange">
         <wlin-collapse-item title='标题1'>内容1</wlin-collapse-item>
         <wlin-collapse-item title='标题2'>内容2</wlin-collapse-item>
         <wlin-collapse-item title='标题3'>内容3</wlin-collapse-item>
       </wlin-collapse>
 
       <wlin-pager 
+          style="margin:10px 0;"
           v-model="pageNo" 
           :total-page="pageSize" 
           :page-size-change="onPageSizeChange"
           @change="onPageChange"
           :warn-call-back="handleWarn"
           :hide-if-one-page="false"
-          :simple="simple"
+          :simple="true"
+      ></wlin-pager>
+
+      <wlin-pager 
+          style="margin:10px 0;"
+          v-model="pageNo" 
+          :total-page="pageSize" 
+          :page-size-change="onPageSizeChange"
+          @change="onPageChange"
+          :warn-call-back="handleWarn"
+          :hide-if-one-page="false"
+          :simple="false"
       ></wlin-pager>
 
       <wlin-tabs v-model="selectedTab" @change="handleTabChange">
@@ -52,7 +64,7 @@ import CollapseItem from './components/collapse/collapse-item.vue'
         props: {
             simple: {
                 type: Boolean,
-                default: false
+                default: true
             },
         },
         components: {
@@ -91,7 +103,7 @@ import CollapseItem from './components/collapse/collapse-item.vue'
                 pageNo: 1,
                 pageSize: 150,
                 selectedTab: 'video',
-                myTitle: '标题3'
+                myTitle: '标题1'
             }
         },
     }

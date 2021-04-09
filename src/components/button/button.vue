@@ -191,6 +191,7 @@ export default {
         background: #4d80f1;
         border-color: #4d80f1;
         color: #fff;
+        opacity: .85;
       }
     }
 
@@ -208,6 +209,7 @@ export default {
         background: #34d19e;
         border-color: #34d19e;
         color: #fff;
+        opacity: .85;
       }
     }
 
@@ -225,6 +227,7 @@ export default {
         background: #999;
         border-color: #999;
         color: #fff;
+        opacity: .85;
       }
     }
 
@@ -243,6 +246,7 @@ export default {
         background: #f91;
         border-color: #f91;
         color: #fff;
+        opacity: .85;
       }
     }
 
@@ -260,6 +264,7 @@ export default {
         background: #fa4351;
         border-color: #fa4351;
         color: #fff;
+        opacity: .85;
       }
     }
 

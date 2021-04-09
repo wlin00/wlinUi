@@ -41,3 +41,15 @@ wlin UI 是一个基于vue的ui组件库。
     yarn serve / npm start
     ```
 
+3. 本地开发（进入文档编辑模式）
+    ```
+    npm run docs:dev
+    ```
+
+3. 一键构建和部署
+    ```
+    ./deploy.sh
+    ```
+    
+    
+
