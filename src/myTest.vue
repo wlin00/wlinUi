@@ -1,6 +1,6 @@
 <template>
     <div class="myTest">
-      <wlin-collapse single style="margin-bottom: 20px;" v-model="myTitle" @change="handleCollapseChange">
+      <wlin-collapse style="margin-bottom: 20px;" v-model="myTitle" @change="handleCollapseChange">
         <wlin-collapse-item title='标题1'>内容1</wlin-collapse-item>
         <wlin-collapse-item title='标题2'>内容2</wlin-collapse-item>
         <wlin-collapse-item title='标题3'>内容3</wlin-collapse-item>
@@ -103,7 +103,7 @@ import CollapseItem from './components/collapse/collapse-item.vue'
                 pageNo: 1,
                 pageSize: 150,
                 selectedTab: 'video',
-                myTitle: '标题1'
+                myTitle: ['标题1', '标题3']
             }
         },
     }

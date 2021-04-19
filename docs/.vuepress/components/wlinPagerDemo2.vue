@@ -1,6 +1,6 @@
 <template>
   <div style="padding-top: 16px;">
-    <h2>完整功能（样式待优化）</h2>
+    <h2>完整功能</h2>
     <p>
       <strong>预览</strong>
     </p>

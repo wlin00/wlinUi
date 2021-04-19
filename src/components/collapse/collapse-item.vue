@@ -10,7 +10,6 @@
           </div>
         </transition>
       </div>
-  
     </div>
 </template>
 
@@ -27,40 +26,22 @@
     data() {
       return {
         visible: false,
-        single: false
       }
     },
     methods: {
       handleClick() {
-
-        if (this.single) { // 根据当前是否单选模式改变click方法
-          this.eventBus.$emit('input', this.title)
-          this.eventBus.$emit('change', this.title)
+        // collapse-item逻辑：点击时，将当前flag的true/false通知父组件
+        if (this.visible) {
+          this.eventBus && this.eventBus.$emit('remove', this.title) // close current item
         } else {
-          this.eventBus.$emit('input', this.title)
-          this.eventBus.$emit('change', this.title)
+          this.eventBus && this.eventBus.$emit('add', this.title) // open current item
         }
-      
       }
     },
-    created() {
-      this.eventBus && this.eventBus.$on('input', (val) => {
-
-        console.log('val',this.title, val, this.visible)
-
-        if (this.single) {
-          this.visible = val === this.title && !this.visible
-        } else {
-          if (val === this.title) {
-            this.visible = !this.visible
-          }
-          // this.visible = val === this.title && !this.visible
-        }
-
-        console.log('res', this.visible)
-
+    mounted() {
+      this.eventBus && this.eventBus.$on('input', (titles) => {
+        this.visible = titles.indexOf(this.title) >= 0 // judge visible of child component
       })
-    
     }
   }
 </script>

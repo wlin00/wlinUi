@@ -11,10 +11,10 @@
     name: 'wlinCollapse',
     props: {
       value: {
-        type: Number | String,
+        type: Array,
         require: true
       },
-      single: {
+      accordion: {
         type: Boolean,
         default: false
       }
@@ -25,23 +25,33 @@
       }
     },
     methods: {
-      handleChange (val) {
-        this.$emit('change', val) // 监听tab事件的改变
-      },
-      handleValueChange (val) {
-        console.log('v', val)
-        this.$emit('input', val) // v-model 默认接收名为value的props、并监听名为input的方法
-      }
     },
     mounted () {
-        // 初始状态时， 将默认的tabs选中值发布给消息中心eventBus
-        this.eventBus.$on('change', this.handleChange) // 监听tab改变的事件回调
-        this.eventBus.$on('input', this.handleValueChange) // v-model：监听tab-value的改变
-        this.eventBus.$emit('input', this.value) // 初始状态，将默认的tabs选中值发布给消息中心eventBus
-        
-        // 将用户设置的可选属性single传递给子组件
-        this.$children.forEach((vm) => {
-          vm.single = this.single
+        // 初始状态时， 将默认的选中值给消息中心eventBus -> init
+        this.eventBus.$emit('input', this.value)
+
+        // listen to add event
+        this.eventBus.$on('add', (title) => {
+          let valueCopy = JSON.parse(JSON.stringify(this.value))
+          if (this.accordion) {
+            valueCopy = [title] // case single mode
+          } else {
+            valueCopy.push(title) // case multiple mode
+          }
+          this.eventBus.$emit('input', valueCopy) // change visible of child component
+          this.$emit('input', valueCopy) // v-model update
+          this.$emit('change', valueCopy) // @change update
+        })
+
+        // listen to remove event
+        this.eventBus.$on('remove', (title) => {
+          let valueCopy = JSON.parse(JSON.stringify(this.value))
+          const index = valueCopy.indexOf(title)
+          // delete target
+          valueCopy.splice(index, 1)
+          this.eventBus.$emit('input', valueCopy) // change visible of child component
+          this.$emit('input', valueCopy) // v-model update
+          this.$emit('change', valueCopy) // @change update
         })
     },
     provide() {
