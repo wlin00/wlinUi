@@ -41,9 +41,9 @@
         </select>
       </div>
       <div class="wlin-pager-jump">
-        <span class="font">跳至</span>
+        <div class="inner-span">跳至</div>
         <input maxlength="15" type="text" id="inp" :value.sync="inputValue" />
-        <span @click="handleJump">Jump</span>
+        <wlin-button type="primary" circle style="width:60px;height:32px;" @click="handleJump">Jump</wlin-button>
       </div>
     </template>
 
@@ -78,10 +78,13 @@
 
 <script>
 import Icon from "../icon/icon";
+import Button from "../button/button";
+
 export default {
   name: "wlinPager",
   components: {
     "wlin-icon": Icon,
+    "wlin-button": Button
   },
   props: {
     hideIfOnePage: {
@@ -169,6 +172,8 @@ export default {
       this.$emit('change', pageNo)
       } else {
         this.warnCallBack && this.warnCallBack()
+        // clear input value sync
+        this.inputValue = ''
       }
     },
     //处理pagesize改变
@@ -260,6 +265,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  @media screen and (max-width: 500px) {
+    min-height: 100px;
+  }
   &-separator {
     width: 20px;
     font-size: 12px;
@@ -277,6 +287,9 @@ export default {
     height: 32px;
     margin-left: 8px;
     box-sizing: border-box;
+    @media screen and(max-width: 500px) {
+      padding: 0 6px;
+    }
     cursor: pointer;
     &:hover {
       border-color: #4D80F0;
@@ -323,6 +336,17 @@ export default {
   &-jump {
     display: inline-flex;
     margin-left: 10px;
+    .inner-span {
+      width: 50px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      background: #fff;
+      color: rgba(0,0,0,.65);
+
+    }
     >input{
       display: inline-flex;
       width: 50px;

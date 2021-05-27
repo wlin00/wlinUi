@@ -38,6 +38,7 @@
       },
       handleWarn(){
         console.warn('currentPage should be greater than 1 and lower than totalPage')
+        this.pageNo = this.pageSize
       },
     },
     data () {

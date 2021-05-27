@@ -60,6 +60,10 @@
     text-align: center;
     border-radius: 4px;
 
+    @media screen and (max-width: 500px) {
+      min-width: 30px;
+    }
+
     &__active{
         background: lightskyblue;
     }

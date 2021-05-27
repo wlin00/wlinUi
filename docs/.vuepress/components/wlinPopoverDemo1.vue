@@ -9,28 +9,28 @@
       <!-- popover组件 - top方向 -->
       <wlin-popover>
         <template>
-          <div style="height: 30px;">popover-content</div>
+          <div style="min-height: 30px;">popover-content</div>
         </template>
         <wlin-button slot="reference">点击</wlin-button>
       </wlin-popover>
       <!-- popover组件 - bottom方向 -->
       <wlin-popover position="bottom">
         <template>
-          <div style="height: 30px;">popover-content</div>
+          <div style="min-height: 30px;">popover-content</div>
         </template>
         <wlin-button slot="reference">点击</wlin-button>
       </wlin-popover>
         <!-- popover组件 - left方向 -->
       <wlin-popover position="left">
         <template>
-          <div style="height: 30px;">popover-content</div>
+          <div style="min-height: 30px;">popover-content</div>
         </template>
         <wlin-button slot="reference">点击</wlin-button>
       </wlin-popover>
       <!-- popover组件 - right方向 -->
       <wlin-popover position="right">
         <template>
-          <div style="height: 30px;">popover-content</div>
+          <div style="min-height: 30px;">popover-content</div>
         </template>
         <wlin-button slot="reference">点击</wlin-button>
       </wlin-popover>
@@ -61,25 +61,25 @@
         <div class="wrap" style="box-sizing:border-box;padding:10px;">
             <wlin-popover>
               <template>
-                <div style="height: 30px;">popover-content</div>
+                <div style="min-height: 30px;">popover-content</div>
               </template>
               <wlin-button slot="reference">点击</wlin-button>
             </wlin-popover>
             <wlin-popover position="bottom">
               <template>
-                <div style="height: 30px;">popover-content</div>
+                <div style="min-height: 30px;">popover-content</div>
               </template>
               <wlin-button slot="reference">点击</wlin-button>
             </wlin-popover>
             <wlin-popover position="left">
               <template>
-                <div style="height: 30px;">popover-content</div>
+                <div style="min-height: 30px;">popover-content</div>
               </template>
               <wlin-button slot="reference">点击</wlin-button>
             </wlin-popover>
             <wlin-popover position="right">
               <template>
-                <div style="height: 30px;">popover-content</div>
+                <div style="min-height: 30px;">popover-content</div>
               </template>
               <wlin-button slot="reference">点击</wlin-button>
             </wlin-popover>
